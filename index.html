@@ -1272,13 +1272,18 @@ function openSheet(i){
   $('sPaper').innerHTML = c.rows.map(function(r, j){ return '<div class="pl"><span class="no">' + (j + 1) + '</span><div class="src-w"><p class="src">' + marked(r[0], r[1]) + '</p><p class="memo">' + esc(r[1] || '') + '</p></div><span class="pen">' + escH(penNote(r[1])) + '</span></div>'; }).join('');
   $('sGood').innerHTML = list(c.good, '작성 중'); $('sBad').innerHTML = list(c.bad, '작성 중'); $('sFix').innerHTML = list(c.fix, '작성 중');
   if (sheet.classList.contains('on')) return;
-  sheet.scrollTop = 0; PAUSE = true; sheet.classList.add('on'); if (!lenis) document.body.style.overflow = 'hidden'; setTimeout(function(){ $('sClose').focus(); }, 60);
+  sheet.scrollTop = 0; PAUSE = true; sheet.classList.add('on'); if (lenis) lenis.stop(); else document.body.style.overflow = 'hidden';
+  try { history.pushState({sheet: 1}, ''); } catch(e){}
+  setTimeout(function(){ $('sClose').focus({preventScroll: true}); }, 60);
 }
-function closeSheet(){ if (!sheet.classList.contains('on')) return; sheet.classList.remove('on'); PAUSE = false; document.body.style.overflow = ''; if (lastFocus) lastFocus.focus(); }
+function closeSheet(){ if (!sheet.classList.contains('on')) return; sheet.classList.remove('on'); PAUSE = false; document.body.style.overflow = ''; if (lenis) lenis.start(); if (lastFocus) lastFocus.focus({preventScroll: true}); }
+// 닫기·ESC는 열 때 쌓은 기록을 되돌리고, 뒤로가기는 창만 닫는다
+function dismissSheet(){ if (history.state && history.state.sheet) history.back(); else closeSheet(); }
+addEventListener('popstate', function(){ closeSheet(); });
 $('cOpen').addEventListener('click', function(){ openSheet(active); });
 wheel.addEventListener('click', function(){ openSheet(active); });
-$('sClose').addEventListener('click', closeSheet);
-addEventListener('keydown', function(e){ if (e.key === 'Escape' && sheet.classList.contains('on')) closeSheet(); });
+$('sClose').addEventListener('click', dismissSheet);
+addEventListener('keydown', function(e){ if (e.key === 'Escape' && sheet.classList.contains('on')) dismissSheet(); });
 
 
 /* ============ 감각 레이어 ============ */
@@ -1288,9 +1293,6 @@ if (window.Lenis && !reduce && fine){
   try {
     lenis = new Lenis({lerp:.11, wheelMultiplier:.95});
     (function lr(t){ lenis.raf(t); requestAnimationFrame(lr); })(performance.now());
-    var _open = openSheet, _close = closeSheet;
-    openSheet = function(i){ _open(i); lenis.stop(); };
-    closeSheet = function(){ _close(); lenis.start(); };
   } catch(e){ lenis = null; }
 }
 // 제목 줄 마스크
