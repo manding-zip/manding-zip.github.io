@@ -718,6 +718,13 @@ body::after{content:"";position:fixed;inset:-50%;z-index:90;pointer-events:none;
 .tier li{font-size:clamp(24px,3vw,46px)}
 .tier li svg{width:.62em;height:.62em;flex:none}
 .bridge .lead-lg{line-height:1.6}
+/* 소개 문단 줄바꿈: 형광펜은 한 덩어리, PC(1024px 이상)에서만 정해진 줄로 */
+.bridge .lead-lg em{white-space:nowrap}
+.bridge .lead-lg br.pc-br{display:none}
+@media (min-width:1024px){
+  .bridge .grid{grid-template-columns:minmax(0,1fr) auto}
+  .bridge .lead-lg br.pc-br{display:inline}
+}
 @media (max-width:760px){
   .tier{grid-template-columns:minmax(0,1fr);gap:12px}
   .wl li{grid-template-columns:minmax(0,1fr)}
@@ -857,7 +864,7 @@ html.mk-lock,html.mk-lock body{overflow:hidden}
     <div class="sec-in grid">
       <h2 class="h2">벽돌 다음엔,<br>광고를 부쉈습니다.</h2>
       <div class="col">
-        <p class="lead-lg">실무 경험이 없어서, 광고를 직접 뜯어보며 배웠습니다. 원본 카피를 한 문장씩 놓고 <em>왜 멈추게 되는지</em>, <em>무엇이 아쉬운지</em>, <em>제가 쓴다면 어떻게 고칠지</em> 적었습니다. 그중 네 편을 아래에 펼쳐 놓았습니다.</p>
+        <p class="lead-lg">실무 경험이 없어서, 광고를 직접 뜯어보며 배웠습니다. <br class="pc-br">원본 카피를 한 문장씩 놓고 <br class="pc-br"><em>왜 멈추게 되는지</em>, <em>무엇이 아쉬운지</em>, <br class="pc-br"><em>제가 쓴다면 어떻게 고칠지</em> 적었습니다. <br class="pc-br">그중 네 편을 아래에 펼쳐 놓았습니다.</p>
       </div>
     </div>
   </section>
@@ -1085,7 +1092,7 @@ var INTRO = [
     '그래서 지금은 덜어냅니다. <strong>쉽고 직관적인지, 그러면서도 멈추게 하는지</strong>를 먼저 봅니다.']},
   {tag:'적용', say:'블록 03 · 마지막 벽돌을 부쉈습니다.', title:'써먹어야 배운 겁니다', body:[
     '저는 ‘배웠다’는 말을 쉽게 하지 않습니다. <strong>써먹을 수 있어야 제대로 배운 것</strong>이라고 생각합니다.',
-    '배운 건 블로그에 정리하고, 인스타그램 콘텐츠에 바로 적용합니다. 광고는 한 문장씩 뜯어보고, 제가 만든다면 무엇을 더 테스트할지까지 기록합니다.',
+    '배운 건 블로그에 정리하고, 인스타그램 콘텐츠에 바로 적용합니다. 광고는 뜯어보는 데서 끝내지 않고, 직접 만들어봤습니다.',
     '<strong>그 기록을 바로 아래에 펼쳐 놓았습니다.</strong>']}
 ];
 var faceImg = new Image(), faceReady = new Promise(function(r){ faceImg.onload = r; faceImg.onerror = r; }); faceImg.src = FACE;
