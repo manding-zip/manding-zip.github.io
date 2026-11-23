@@ -341,7 +341,7 @@ main{overflow-x:clip}
   .desc{margin-top:10px}
   .meta{margin-top:14px}
   .meta b{font-size:24px}
-  .open{margin-top:10px}
+  .open{margin-top:18px}
   .counter{left:18px;bottom:14px}
   .rows .rh{display:none}
   .r{grid-template-columns:minmax(0,1fr);gap:10px}
@@ -825,6 +825,110 @@ html.mk-lock,html.mk-lock body{overflow:hidden}
   .mk .paper.full{margin-top:24px}
   .mk-row.shot{grid-template-columns:minmax(0,1fr);gap:16px}
 }
+/* ---------- 영상 + 분석 좌우 분할 (c.flow.video가 있는 카드에 적용, 다른 카드·광고 제작에도 재사용) ---------- */
+#sSplit:empty{display:none}
+.sheet.vs-on .sh-head,.sheet.vs-on #sPaper{display:none}
+.vs{--vfull:min(calc(100svh - var(--sth,64px) - 110px),640px);display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(32px,4vw,64px);align-items:start;margin-top:clamp(16px,2vw,28px)}
+.vs-media{position:sticky;top:calc(var(--sth,64px) + 16px);z-index:1}
+.vs-player{display:block;height:var(--vfull);width:auto;aspect-ratio:9/16;border-radius:22px;background:#000;box-shadow:0 0 0 1px rgba(255,255,255,.1),0 30px 60px -20px rgba(0,0,0,.7)}
+.vs-cap{margin-top:12px;display:flex;flex-direction:column;gap:2px;font-size:13px;line-height:1.5;color:var(--muted)}
+.vs-cap a{align-self:flex-start;color:var(--yellow);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.vs-body{min-width:0}
+.sheet .vs-title{font-size:clamp(36px,4.2vw,60px)!important;line-height:1.05;margin-top:0!important}
+.vs-body .lead{max-width:none}
+.vs-body .paper.full{margin-top:clamp(24px,3vw,36px)}
+.fl-time{display:inline-flex;align-items:center;margin-top:7px;padding:3px 10px 3px 9px;border:1px solid #cfd1d4;border-radius:999px;background:#fff;font-family:var(--f-sans);font-size:12.5px;line-height:1.4;font-weight:800;color:#141414;cursor:pointer;font-variant-numeric:tabular-nums}
+.fl-time:hover{border-color:#141414}
+.vs .fl-step{margin:0 -14px;padding-left:14px;padding-right:14px;border-radius:10px;transition:background-color .35s}
+.vs .fl-step.is-now{background:#fff}
+.fl-q+.fl-q{margin-top:6px}
+.fl-idea p.fl-ib{font-weight:500}
+.fl-idea p.fl-ib strong{font-weight:900}
+.fl-idea p.fl-in{margin-top:4px;font-size:13px;line-height:1.5;font-weight:500;color:#4b7a5c}
+@media (max-width:820px){
+  .vs{--vfull:min(56svh,calc((100vw - 2 * var(--gx)) * 16 / 9));display:block;margin-top:6px}
+  .vs-media{top:var(--sth,60px);z-index:3;margin:0 calc(-1 * var(--gx));padding:0 var(--gx) 12px;pointer-events:none}
+  .vs-media::before{content:"";position:absolute;left:0;right:0;top:0;height:0;background:var(--concrete);box-shadow:0 10px 18px -12px rgba(0,0,0,.8);transition:height .35s cubic-bezier(.2,.8,.2,1)}
+  .vs-frame{position:relative;width:max-content;margin:0 auto;pointer-events:auto;transform-origin:50% 0;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+  .vs-cap{align-items:center;text-align:center;transition:opacity .2s}
+  .vs-cap a{align-self:center}
+  .vs.mini .vs-media::before{height:calc(var(--vfull) * .42 + 12px)}
+  .vs.mini .vs-frame{transform:scale(.42)}
+  .vs.mini .vs-cap{opacity:0;pointer-events:none}
+  .fl-time{margin:0 0 0 8px;vertical-align:1px}
+  .vs .fl-step{margin:0 -10px;padding-left:10px;padding-right:10px}
+}
+/* 분할 화면: 내 판단이 광고 대사보다 먼저 보이게, PC 폭 넓힘 (영상 크기는 그대로) */
+.sheet.vs-on .sheet-in{max-width:1440px}
+.vs .fl-q{font-size:16px;line-height:1.6;font-weight:400;letter-spacing:-.015em;color:#55595f}
+.vs .fl-j{font-size:17px;line-height:1.65;font-weight:500;color:#141414}
+.vs-note{font-size:12px;color:#7d8187}
+@media (max-width:820px){
+  .vs .fl-q{font-size:15px}
+  .vs .fl-j{font-size:16px}
+}
+/* 견적: 광고 대본(후킹 → 불안 → 해결 → 근거 → 구매 유도) + 특가 가격표 */
+.o-script{list-style:none;margin:0;padding:0;display:grid;gap:clamp(14px,1.6vw,22px)}
+.o-script li{display:grid;grid-template-columns:6.5em minmax(0,1fr);gap:clamp(14px,2vw,28px);align-items:baseline}
+.o-script li>*{min-width:0}
+.o-k{font-size:16px;font-weight:700;line-height:1.4;color:var(--muted);letter-spacing:-.01em}
+.o-script .o-hook{margin-bottom:clamp(8px,1.2vw,18px)}
+.o-script .lead-lg{max-width:none;font-size:clamp(20px,2vw,30px)}
+.deal{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:clamp(20px,2.4vw,30px);padding-bottom:clamp(18px,2vw,26px);border-bottom:1px solid rgba(0,0,0,.14)}
+.deal s{font-size:clamp(16px,1.5vw,20px);font-weight:700;color:#5a4a00;text-decoration-thickness:2px}
+.deal b{font-family:var(--f-serif);font-weight:900;font-size:clamp(36px,4.4vw,60px);line-height:1;letter-spacing:-.03em}
+.deal .off{background:#d9271c;color:#fff;border-radius:30px;padding:4px 11px;font-size:13px;font-weight:800}
+.soldout{margin-top:clamp(18px,2vw,24px);text-align:center;font-weight:800;font-size:clamp(15px,1.4vw,18px);color:#111}
+@media (max-width:820px){
+  .o-script li{grid-template-columns:minmax(0,1fr);gap:4px}
+}
+/* 광고 제작: 레퍼런스와 내 광고를 나란히 보며 읽기 */
+.mkv{--mkh:min(calc(100svh - 250px),460px);display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(28px,3.4vw,52px);align-items:start;margin-top:clamp(28px,3.4vw,44px)}
+.mkv-left{position:sticky;top:88px;min-width:0}
+.mkv-media{display:flex;gap:12px}
+.mkv-v{margin:0}
+.mkv-v figcaption{margin-bottom:7px;font-size:13px;font-weight:800;color:var(--muted)}
+.mkv-v:last-child figcaption{color:var(--yellow)}
+.mkv-box{position:relative;border-radius:16px;overflow:hidden;background:#000;box-shadow:0 0 0 1px rgba(255,255,255,.12)}
+.mkv-player{display:block;height:var(--mkh);width:auto;aspect-ratio:9/16;background:#000}
+.mkv-snd{position:absolute;top:8px;right:8px;z-index:3;width:34px;height:34px;padding:0;border:0;border-radius:50%;background:rgba(0,0,0,.62);font-size:15px;line-height:34px;text-align:center;cursor:pointer}
+.mkv-ov{position:absolute;inset:0;z-index:2;background:rgba(0,0,0,.85);color:#fff;font-size:14px;font-weight:800;line-height:1.4;text-align:center;pointer-events:none}
+.mkv-ov span{position:absolute;left:50%;top:33.333%;transform:translate(-50%,-50%);width:max-content;max-width:86%;padding:6px 12px;border:1.5px solid rgba(255,255,255,.85);border-radius:12px}
+.mkv-ov[hidden]{display:none}
+.mkv-cap{max-width:calc(var(--mkh) * 9 / 8 + 12px)}
+.mkv .paper.full{margin-top:0}
+.mkv .fl-step{margin:0 -14px;padding-left:14px;padding-right:14px;border-radius:10px;transition:background-color .35s}
+.mkv .fl-step.is-now{background:#fff}
+.mkv .fl-j{font-size:17px;line-height:1.65;font-weight:500;color:#141414}
+.mkv .mk-why{margin-top:12px}
+.mk-plays{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.mk-plays .fl-time{margin-top:0}
+.mk-scenes{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:14px}
+.mk-scenes>li{padding-top:14px;border-top:1px dashed #d4d6d9}
+.mk-scenes b{display:block;margin-top:4px;font-size:16px;line-height:1.4;font-weight:900;color:#141414}
+.mk-cmp2 p{margin-top:5px;font-size:15.5px;line-height:1.6;color:#141414}
+.mk-cmp2 p:first-child{color:#55595f}
+.mk-cmp2 p span{display:inline-block;min-width:4.4em;margin-right:6px;font-size:12.5px;font-weight:800;color:#6a6e75}
+.mk-qlab{display:block;margin-top:10px;font-size:12.5px;line-height:1.4;font-weight:800;color:#6a6e75}
+.mk-quote{margin-top:2px;font-size:16px;line-height:1.6;font-weight:400;letter-spacing:-.015em;color:#55595f}
+.mk-quote.ref{color:#8b8f96}
+@media (max-width:820px){
+  .mkv{--mkh:min(30svh,230px);display:block}
+  .mkv-left{display:contents}
+  .mkv-media{position:sticky;top:60px;z-index:5;justify-content:center;margin:0 calc(-1 * var(--gx));padding:8px var(--gx) 10px;background:#000;box-shadow:0 10px 18px -12px rgba(0,0,0,.9)}
+  .mkv-cap{margin:10px 0 16px;align-items:center;text-align:center;max-width:none}
+  .mkv-cap a{align-self:center}
+  .mkv .fl-step{margin:0 -10px;padding-left:10px;padding-right:10px}
+  .mkv .fl-j{font-size:16px}
+  .mkv-snd{width:30px;height:30px;line-height:30px;font-size:13px}
+}
+/* 광고 제작: 섹션 폭 1440px, 늘어난 폭은 오른쪽 분석 칸으로 (모바일은 그대로) */
+.mk .sec-in{max-width:1440px}
+@media (min-width:821px){
+  .mkv{grid-template-columns:minmax(420px,530px) minmax(0,1fr)}
+  .mkv-media{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .mkv-player{width:min(100%,calc(var(--mkh) * 9 / 16));height:auto}
+}
 </style>
 </head>
 <body style="margin:0">
@@ -876,7 +980,6 @@ html.mk-lock,html.mk-lock body{overflow:hidden}
         <p class="eyebrow label" id="cEyebrow"></p>
         <div class="ttl"><h2 id="cTitle"></h2></div>
         <p class="desc" id="cDesc"></p>
-        <div class="meta"><div><b id="cRows">0</b><span class="label">문장 분석</span></div><div><b id="cScore">—</b><span class="label">총점</span></div></div>
         <button class="open label" id="cOpen" type="button">해체 기록 열기 <svg class="ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       </div>
       <div class="wheel" id="wheel">
@@ -900,66 +1003,27 @@ html.mk-lock,html.mk-lock body{overflow:hidden}
           <h3 class="mk-name">치아미백제 · 흡연자 성훈씨 편</h3>
           <p class="mk-lead">흡연자 치아 착색 광고의 흐름은 살리고, 제품의 진짜 강점과 구매 이유를 채워 넣은 광고.</p>
         </div>
-        <figure class="td-phone sm"><span class="tape"></span><img src="making/0_card.jpg" alt="치아미백제 광고 대표 장면" loading="lazy"></figure>
       </div>
-      <div class="paper full fl">
-        <ol class="fl-steps">
-          <li class="fl-step mk-took">
-            <div class="fl-k"><b>가져온 것</b><span>0:00~0:24</span></div>
-            <div class="fl-v"><div class="mk-row shot">
-              <div>
-                <p class="fl-q">흡연자 → 11년 차 성훈씨 → 홈에 쌓인 니코틴·타르 → 양치로도 안 됨.</p>
-                <p class="mk-text">이미 잘 되는 흐름이라 대본은 그대로 두고, 장면을 새로 설계했습니다.</p>
-                <div class="mk-plan"><span>장면 설계</span><ul><li>성훈씨를 처음부터 끝까지 한 사람으로</li><li>흡연자의 생활 장면(창가 흡연, 회식)</li><li>'끈적거리는'을 늘어지는 타르로</li></ul></div>
-              </div>
-              <figure class="mk-shots"><img src="making/1_took.jpg" alt="창가에서 담배를 피우는 성훈씨와 누런 치아 장면" loading="lazy"></figure>
-            </div></div>
-          </li>
-          <li class="fl-step mk-swap">
-            <div class="fl-k"><b>바꾼 것</b><span>해결 조건 · 0:24~0:29</span></div>
-            <div class="fl-v"><div class="mk-row">
-              <div>
-                <div class="mk-cmp"><div><span>레퍼런스</span><p class="mk-ref">"치아 홈에 쌓인 니코틴과 타르를 제거하고 홈을 메꿔 재착색을 방지해야 합니다"</p></div><div><span>내 광고</span><p class="fl-q">"치아를 상하게 하지 않으면서 니코틴과 타르만 골라 분해해야 합니다"</p></div></div>
-                <p class="fl-j mk-why"><b>이유</b>재착색 방지는 이 제품의 효과가 아니었습니다. 치아를 깎지 않고 니코틴과 타르만 골라 분해한다는 제품의 진짜 강점으로 바꿨습니다.</p>
-              </div>
-            </div></div>
-          </li>
-          <li class="fl-step mk-swap">
-            <div class="fl-k"><b>바꾼 것</b><span>성분 · 0:38~0:44</span></div>
-            <div class="fl-v"><div class="mk-row">
-              <div>
-                <div class="mk-cmp"><div><span>레퍼런스</span><p class="mk-ref">"하이드로겐 퍼옥사이드 성분이…"</p></div><div><span>내 광고</span><p class="fl-q">"치과 미백에 쓰이는 과산화수소에 상추 추출물을 더해 독자 개발한 프리미엄 미백 성분 테라로바"</p></div></div>
-                <p class="fl-j mk-why"><b>이유</b>어려운 성분 이름은 아무도 모릅니다. 모두가 아는 치과 미백과 같은 성분이라고 하면 "이것도 진짜 하얘지겠다"는 생각이 자연스럽게 듭니다.</p>
-              </div>
-            </div></div>
-          </li>
-          <li class="fl-step mk-swap">
-            <div class="fl-k"><b>바꾼 것</b><span>장면 · 0:15 → 0:47</span></div>
-            <div class="fl-v"><div class="mk-row shot">
-              <div>
-                <p class="fl-q">갈색이 차오르던 같은 치아 홈이 하얗게 바뀌도록, 원인과 해결을 한 화면으로 이었습니다.</p>
-              </div>
-              <figure class="mk-shots"><img src="making/4a_cause.jpg" alt="치아 홈에 니코틴과 타르가 쌓인 장면" loading="lazy"><span class="mk-arrow" aria-hidden="true">→</span><img src="making/4b_solve.jpg" alt="같은 치아 홈이 하얗게 바뀌는 장면" loading="lazy"></figure>
-            </div></div>
-          </li>
-          <li class="fl-step mk-add">
-            <div class="fl-k"><b>더한 것</b><span>0:50~1:01</span></div>
-            <div class="fl-v"><div class="mk-row shot">
-              <div>
-                <p class="fl-q">누적 판매 100만 개, 전국 올리브영</p>
-                <p class="fl-j mk-why"><b>이유</b>판매량 자체가 효과의 증거가 되고, 올리브영 입점은 신뢰를 더하면서 광고 링크가 아니어도 가까운 매장에서 쉽게 살 수 있다는 생각을 줍니다.</p>
-              </div>
-              <figure class="mk-shots"><img src="making/5b_oliveyoung.jpg" alt="올리브영 매장에서 제품을 들고 있는 장면" loading="lazy"></figure>
-            </div></div>
-          </li>
-        </ol>
-        <div class="fl-actions"><button class="fl-btn" id="mkPlay" type="button">내가 만든 광고 보기</button><a class="fl-btn ghost" href="https://www.facebook.com/ads/library/?id=1006562759001629" target="_blank" rel="noopener noreferrer">원본 레퍼런스 보기 (메타 광고 라이브러리)</a></div>
+      <div class="mkv" id="mkv">
+        <div class="mkv-left">
+          <div class="mkv-media">
+            <figure class="mkv-v"><figcaption>레퍼런스</figcaption><div class="mkv-box"><video class="mkv-player" id="mkRefV" controls playsinline muted preload="metadata" poster="making/ref_healthydenti_poster.jpg"><source src="making/ref_healthydenti.mp4" type="video/mp4"></video><button class="mkv-snd" type="button" data-v="mkRefV" aria-label="레퍼런스 소리 켜기">🔇</button><div class="mkv-ov" id="mkRefOv" hidden><span>레퍼런스에는 없는 장면</span></div></div></figure>
+            <figure class="mkv-v"><figcaption>내 광고</figcaption><div class="mkv-box"><video class="mkv-player" id="mkMyV" controls playsinline preload="metadata" poster="making/seonghun_ad_poster.jpg"><source src="making/seonghun_ad.mp4" type="video/mp4"></video><button class="mkv-snd" type="button" data-v="mkMyV" aria-label="내 광고 소리 끄기">🔊</button></div></figure>
+          </div>
+          <p class="vs-cap mkv-cap"><span>출처: Healthy denti 광고 (메타 광고 라이브러리)</span><span class="vs-note">분석 목적으로만 사용하며, 요청 시 즉시 삭제합니다.</span><a href="https://www.facebook.com/ads/library/?id=1006562759001629" target="_blank" rel="noopener noreferrer">원본 레퍼런스 보기</a></p>
+        </div>
+        <div class="paper full fl mkv-body">
+          <ol class="fl-steps">
+            <li class="fl-step mk-took" data-t="0"><div class="fl-k"><b>가져온 것</b><span>0:00~0:24</span></div><div class="fl-v"><p class="fl-j mk-desc">흡연자는 아무리 양치해도 누렇다 → 11년 차 흡연자 성훈씨 → 치아 홈에 쌓인 니코틴과 타르 → 끈적거려서 양치로도 안 된다. 이미 잘 되는 흐름이라 대본은 그대로 가져오고, 장면을 새로 설계했습니다.</p><ol class="mk-scenes"><li><div class="mk-plays"><button class="fl-time mk-play" type="button" data-my="3" data-ref="3">▶ 레퍼런스 0:03 · 내 광고 0:03</button></div><b>11년 차 흡연자</b><div class="mk-cmp2"><p><span>레퍼런스</span>흐릿한 배경에 담배 든 손만 보인다.</p><p><span>내 광고</span>사원증을 건 성훈씨가 창가에서 담배를 피운다. 흡연자가 누구인지 얼굴로 보이게 했다.</p></div></li><li><div class="mk-plays"><button class="fl-time mk-play" type="button" data-my="7" data-ref="7">▶ 레퍼런스 0:07 · 내 광고 0:07</button></div><b>담배 피우는 사람들</b><div class="mk-cmp2"><p><span>레퍼런스</span>흰 배경에 치아 사진만 놓여 있다.</p><p><span>내 광고</span>소주병과 불판이 있는 회식 자리 위에 치아 사진을 올렸다. 흡연자의 일상 장면으로 보이게 했다.</p></div></li><li><div class="mk-plays"><button class="fl-time mk-play" type="button" data-my="18" data-ref="19">▶ 레퍼런스 0:19 · 내 광고 0:18</button></div><b>끈적거리는 특성</b><div class="mk-cmp2"><p><span>레퍼런스</span>진흙과 투명한 액체가 튀는 장면이다.</p><p><span>내 광고</span>검은 타르가 끈적하게 늘어지며 떨어진다. '끈적거린다'는 말이 눈으로 보이게 했다.</p></div></li><li><div class="mk-plays"><button class="fl-time mk-play" type="button" data-my="21" data-ref="23">▶ 레퍼런스 0:23 · 내 광고 0:21</button></div><b>양치해도 그대로</b><div class="mk-cmp2"><p><span>레퍼런스</span>갑자기 젊은 여성 모델로 바뀌어 양치하고, 마지막까지 그 모델이 나온다.</p><p><span>내 광고</span>처음 나온 성훈씨가 그대로 양치하고 누런 이를 보여주고, 마지막에 웃는 것도 성훈씨다. 페르소나를 끝까지 한 사람으로 유지했다.</p></div></li></ol></div></li>
+            <li class="fl-step mk-swap" data-t="24"><div class="fl-k"><b>바꾼 것</b><span>해결 조건 · 0:24</span></div><div class="fl-v"><div class="mk-plays"><button class="fl-time mk-play" type="button" data-my="24" data-ref="26">▶ 레퍼런스 0:26 · 내 광고 0:24</button></div><span class="mk-qlab">레퍼런스</span><p class="mk-quote ref">"이를 해결하기 위해서는 치아 홈에 쌓인 니코틴과 타르를 제거하고 홈을 메꿔 재착색을 방지해야 합니다."</p><span class="mk-qlab">내 광고</span><p class="mk-quote">"이를 해결하기 위해서는 치아를 상하게 하지 않으면서 니코틴과 타르만 골라 분해해야 합니다."</p><p class="fl-j mk-why"><b>이유</b>재착색 방지는 이 제품의 효과가 아니었습니다. 이 제품의 진짜 강점인 '치아를 깎지 않고 홈 속 니코틴과 타르만 골라 분해한다'로 바꿨습니다. 홈을 메우는 내용은 뒤의 성분 설명에서 이어집니다.</p></div></li>
+            <li class="fl-step mk-swap" data-t="36"><div class="fl-k"><b>바꾼 것</b><span>성분 · 0:36</span></div><div class="fl-v"><div class="mk-plays"><button class="fl-time mk-play" type="button" data-my="36" data-ref="39">▶ 레퍼런스 0:39 · 내 광고 0:36</button></div><span class="mk-qlab">레퍼런스</span><p class="mk-quote ref">"식약처에서 안전성을 검증받은 제품으로 하이드로겐 퍼옥사이드 성분이 치아에 자극 없이 유해물질과 색소만을 제거하고, 치아의 구성성분과 동일한 하이드록시 아파타이트 성분으로 치아의 홈을 메꿔 재착색을 방지합니다."</p><span class="mk-qlab">내 광고</span><p class="mk-quote">"식약처 허가를 받은 의약외품으로 치과 미백에 쓰이는 과산화수소에 상추 추출물을 더해 독자 개발한 프리미엄 미백 성분 테라로바. 치아를 깎지 않고 홈 속 깊이 스며들어 니코틴과 타르만 골라 분해한 뒤 그 자리까지 촘촘히 메워줍니다."</p><p class="fl-j mk-why"><b>이유</b>하이드로겐 퍼옥사이드, 하이드록시 아파타이트는 소비자가 모르는 말입니다. 대신 '치과 미백에 쓰이는'으로 모두가 아는 효과를 빌려오고, '독자 개발한'으로 신뢰를 더한 뒤 '테라로바'라는 이름 하나로 정리했습니다. 치과 미백과 같은 성분이라고 하면 "이것도 진짜 하얘지겠다"는 생각이 자연스럽게 듭니다.</p></div></li>
+            <li class="fl-step mk-swap" data-t="44"><div class="fl-k"><b>바꾼 것</b><span>장면 · 0:12 → 0:44</span></div><div class="fl-v"><div class="mk-plays"><button class="fl-time mk-play" type="button" data-my="12" data-ref="13">▶ 원인 장면 (레퍼런스 0:13 · 내 광고 0:12)</button><button class="fl-time mk-play" type="button" data-my="44" data-ref="41">▶ 해결 장면 (레퍼런스 0:41 · 내 광고 0:44)</button></div><div class="mk-cmp2"><p><span>레퍼런스</span>원인은 파란 와이어프레임 치아와 세균 캐릭터, 해결은 실사 치아 클로즈업으로 서로 다른 화면이다.</p><p><span>내 광고</span>앞에서 갈색 니코틴과 타르가 차오르던 바로 그 치아 홈에, 뒤에서 성분이 스며들어 하얗게 바뀌도록 했습니다. 원인과 해결이 같은 화면으로 이어집니다.</p></div></div></li>
+            <li class="fl-step mk-add" data-t="50"><div class="fl-k"><b>더한 것</b><span>0:50</span></div><div class="fl-v"><div class="mk-plays"><button class="fl-time mk-play" type="button" data-my="50" data-ref="none">▶ 누적 판매 (내 광고 0:50 · 레퍼런스에는 없음)</button><button class="fl-time mk-play" type="button" data-my="58" data-ref="none">▶ 올리브영 (내 광고 0:58 · 레퍼런스에는 없음)</button></div><span class="mk-qlab">내 광고</span><p class="mk-quote">"출시 이후 누적 판매 100만 개를 넘기며 많은 분이 효과를 보고 만족감을 드러내고 있습니다."</p><p class="mk-quote">"해당 제품은 현재 전국 올리브영에서 만나 볼 수 있습니다."</p><p class="fl-j mk-why"><b>이유</b>누적 판매 100만 개라는 숫자 자체가 신뢰를 주고, "효과가 확실하니까 이만큼 팔렸겠지"라는 생각을 하게 만듭니다. 올리브영 입점은 그것만으로 신뢰를 높이고, 광고 링크가 아니어도 가까운 매장에서 쉽게 살 수 있다는 생각을 줍니다.</p></div></li>
+          </ol>
+          <div class="fl-actions"><a class="fl-btn ghost" href="https://www.facebook.com/ads/library/?id=1006562759001629" target="_blank" rel="noopener noreferrer">원본 레퍼런스 보기 (메타 광고 라이브러리)</a></div>
+        </div>
       </div>
     </div>
-    <dialog class="mk-modal" id="mkModal" aria-label="내가 만든 광고 영상">
-      <button class="close mk-close" id="mkClose" type="button">닫기</button>
-      <video class="mk-player" id="mkPlayer" controls playsinline preload="none" poster="making/seonghun_ad_poster.jpg"><source src="making/seonghun_ad.mp4" type="video/mp4"></video>
-    </dialog>
   </section>
 
   <!-- 3. 채널 -->
@@ -992,8 +1056,7 @@ html.mk-lock,html.mk-lock body{overflow:hidden}
     <div class="sec-in">
       <h2 class="h2"><em>신입이라,</em><br>이렇게 일합니다.</h2>
       <ol class="wl">
-        <li><strong>모르면 <em>빠르게 묻고,</em><br><em>바로 적용</em>합니다.</strong><p>혼자 오래 붙잡지 않습니다. 필요한 부분을 묻고, 이유까지 들은 다음 결과물에 반영합니다.</p></li>
-        <li><strong>완성 전에<br><em>먼저 보여드립니다.</em></strong><p>다 만들고 나서 방향이 틀리면 늦습니다. 중간 결과를 보여드리고, 방향이 맞는지 확인하며 진행합니다.</p></li>
+        <li><strong>모르면 <em>묻고,</em><br>완성 전에 <em>먼저 보여드립니다.</em></strong><p>혼자 오래 붙잡지 않습니다. 필요한 부분은 이유까지 묻고, 다 만들기 전에 중간 결과를 보여드려 방향부터 맞춥니다.</p></li>
         <li><strong>결과는<br><em>숫자로 확인</em>합니다.</strong><p>잘 나온 수치와 아쉬운 수치를 같이 보고, 다음에 무엇을 살리고 바꿀지 정합니다.</p></li>
         <li><strong>같은 지적을<br><em>두 번 받지 않습니다.</em></strong><p>한 번 해본 일은 다음에 더 빠르게, 한 번 배운 건 다음 결과물에서 달라져 있게 합니다.</p></li>
       </ol>
@@ -1003,12 +1066,18 @@ html.mk-lock,html.mk-lock body{overflow:hidden}
   <!-- 4. 제안: ① 제안 ② 견적서 ③ 증명 -->
   <section class="offer" id="offer">
     <div class="sec-in o-a">
-      <h2 class="h2 o-h">일단 일 시켜보세요.<br>1달 동안 돈 안 주셔도<br>괜찮습니다.</h2>
-      <p class="lead-lg o-lead">경력 없는 신입을 뽑는 게 부담이라는 거 압니다.<br>그러니 마음에 들면 <em>그때 뽑고, 그때 돈 주세요.</em></p>
+      <ol class="o-script">
+        <li class="o-hook"><span class="o-k">후킹</span><h2 class="h2 o-h">신입 뽑았다가<br>후회하신 적 있나요?</h2></li>
+        <li><span class="o-k">불안</span><p class="lead-lg">가르쳐놨더니 기대만큼 안 크고, 같은 말을 몇 번씩 하게 되는 신입.</p></li>
+        <li><span class="o-k">해결</span><p class="lead-lg">그래서 먼저 써보고 결정하시라고 준비했습니다. <em>첫 달은 0원입니다.</em></p></li>
+        <li><span class="o-k">근거</span><p class="lead-lg">같은 지적은 두 번 받지 않고, 말이 아니라 결과물로 증명합니다.</p></li>
+        <li><span class="o-k">구매 유도</span><p class="lead-lg">마음에 들면 그때 채용하세요. 다른 회사가 먼저 채용하기 전에.</p></li>
+      </ol>
     </div>
     <div class="sec-in o-b">
-      <div class="plan plan-xl"><span class="stamp" aria-hidden="true">1개월<br>무급 보증</span>
-          <div class="plan-top"><span>박범진 채용 견적서</span><span class="badge">1달 먼저 일하기</span></div>
+      <div class="plan plan-xl"><span class="stamp" aria-hidden="true">품절<br>임박</span>
+          <div class="plan-top"><span>신입 특가 기획전</span><span class="badge">한정 수량 1명</span></div>
+          <div class="deal"><s>신입 연봉</s><b>첫 달 0원</b><span class="off">100% 할인</span></div>
           <div class="seg" id="seg"><i class="knob"></i><button type="button" aria-pressed="true" id="segY">마음에 들면</button><button type="button" aria-pressed="false" id="segN">마음에 안 들면</button></div>
           <div class="price" aria-live="polite"><b id="price">채용</b><span id="priceSub">그때부터 돈 주세요.</span></div>
           <ul class="feat2">
@@ -1016,14 +1085,10 @@ html.mk-lock,html.mk-lock body{overflow:hidden}
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>말이 아니라 결과물로 증명</span></li>
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>같은 지적 두 번 받지 않기</span></li>
           </ul>
-          <div class="buys"><a class="buy" href="mailto:bag4442@gmail.com">메일로 일 맡기기 <span>bag4442@gmail.com</span></a><a class="buy alt" href="tel:01071085066">전화로 일 맡기기 <span>010-7108-5066</span></a></div>
+          <div class="buys"><a class="buy" href="mailto:bag4442@gmail.com">지금 바로 담기 (메일) <span>bag4442@gmail.com</span></a><a class="buy alt" href="tel:01071085066">지금 바로 담기 (전화) <span>010-7108-5066</span></a></div>
+          <p class="soldout">다른 회사에 채용되는 순간 품절됩니다.</p>
           <p class="fine">1달 동안 돈 안 주셔도 괜찮습니다. 마음에 안 드시면 한 푼도 받지 않습니다.</p>
         </div>
-    </div>
-    <div class="sec-in o-c">
-      <p class="o-big" aria-label="1달 만에 결과로 증명하겠습니다."><span class="o-l"><span>1달 만에</span></span><span class="o-l y"><span>결과로</span></span><span class="o-l o"><span>증명하겠습니다.</span></span></p>
-      <i class="o-rule" aria-hidden="true"></i>
-      <p class="o-night">그래도 부족하다면, <em>야근을 해서라도</em> 어떻게든 채우겠습니다.</p>
     </div>
   </section>
 
@@ -1056,7 +1121,7 @@ html.mk-lock,html.mk-lock body{overflow:hidden}
   <div class="sheet-in">
     <div class="sheet-top"><span id="sEyebrow"></span><button class="close" id="sClose" type="button">닫기</button></div>
     <div class="sh-head"><div><h3 id="sTitle"></h3><p class="fl-target" id="sTarget" hidden></p><p class="lead" id="sHook"></p></div><figure class="td-phone sm"><span class="tape"></span><img id="sThumb" alt="광고 첫 장면 캡처"></figure></div>
-    <div class="paper full" id="sPaper"></div>
+    <div class="paper full" id="sPaper"></div><div id="sSplit"></div>
     <div class="stickies">
       <div class="sticky s1"><p class="pen-k">잘 지은 부분</p><div id="sGood"></div></div>
       <div class="sticky s2"><p class="pen-k">아쉬운 부분</p><div id="sBad"></div></div>
@@ -1098,7 +1163,7 @@ var INTRO = [
 var faceImg = new Image(), faceReady = new Promise(function(r){ faceImg.onload = r; faceImg.onerror = r; }); faceImg.src = FACE;
 var CASES = [
   {color:'#1c1b17', c2:'#0f0f0d', eyebrow:'공정 01, 당뇨 광고', title:'니프젠 스파이크', date:'2026.09.30', score:'★★★★',
-   desc:'소변 거품 하나로 불안을 끝까지 끌고 가는 힘은 강하지만, 정작 \'왜 이 제품이어야 하는지\'는 비어 있는 광고.',
+   desc:'소변 거품 하나로 불안을 끝까지 끌고 가는 힘이 강한 광고. 제품이 등장할 때 믿을 만한 근거를 하나 더 붙이면 더 설득력 있을 것 같다.',
    rows:[
     ['소변에 거품 끼기 시작했다면 지금 당장 멈추고 보세요','1. 일상에서 쉽게 경험할 수 있는 ‘소변에 거품’이라는 경험\n→ 타겟을 특정하여 관심을 끔\n2. ‘지금 당장 멈추고 보세요’\n→ 다음 장면을 궁금하게 만듦 → 다음 시청을 의도'],
     ['이거 그냥 넘기면 5년 안에 합병증으로 후회합니다.','1. ‘5년 안’, ‘합병증’, ‘후회’ 사용\n→ 현재 문제를 방치하면 생길 수 있는 심각한 문제 언급\n→ 심리적 불안감 → 문제를 해결하고 싶게 만듦'],
@@ -1114,9 +1179,9 @@ var CASES = [
    good:['‘소변 거품’이라는 주제를 시작부터 마지막까지 끌고 옴','초반에 타겟을 명확히 지정해 “내 이야기다, 뭐지?”라는 생각을 유도','방치 후 일상생활에 지장이 가는, 있을 법한 일을 예시로 듦','제품명을 후반부에 배치해 광고 티를 최대한 줄임'],
    bad:['문제가 해결되는 구조는 이해되지만 제품에 대한 신뢰가 부족함','굳이 이 제품을 사야 하는 이유가 애매함','기간을 최대 한 달로 설정해서 객단가를 높일 방법이 없음'],
    fix:['“미국 당뇨인들 사이에서 난리 난 제품 성분을 그대로 가져온 니프젠 스파이크 리듀코스 DNJ”','“국내 최초 섭취형 당 독소 분해제”','“꾸준히 3달 섭취하면 당뇨 걱정 없이 살 수 있다”'],
-   flow:{"target": "소변 거품이 신경 쓰이기 시작한 당뇨인", "steps": [{"name": "후킹", "ref": "1번", "verdict": "good", "quote": "\"소변에 거품 끼기 시작했다면 지금 당장 멈추고 보세요\"", "judge": "증상 하나로 타겟을 특정하고, 다음 장면을 궁금하게 만듦"}, {"name": "불안 키우기", "ref": "2~5번", "verdict": "good", "quote": "\"5년 안에 합병증\" → \"췌장이 당 독소에 절여져서…\" → \"발가락부터 썩어 들어가는\"", "judge": "'절여진다', '막혀간다' 같은 강한 단어와 일상 속 증상으로 심각성을 키움"}, {"name": "해결 원리", "ref": "6~7번", "quote": "\"췌장에 낀 당 독소만 빼내면 돼요\" → \"인슐린이 다시 쏟아져 나오거든요\""}, {"name": "제품 등장", "ref": "8번", "verdict": "bad", "quote": "\"니프젠 스파이크 리듀코스 DNJ가 바로 그 역할을 하죠.\"", "pairs": [{"judge": "해결 원리는 이해되지만, 제품에 대한 신뢰가 부족함", "idea": "\"미국 당뇨인들 사이에서 난리 난 제품 성분을 그대로 가져온 니프젠 스파이크 리듀코스 DNJ\""}, {"judge": "굳이 이 제품을 사야 하는 이유가 애매함", "idea": "\"국내 최초 섭취형 당 독소 분해제\""}]}, {"name": "효과와 기간", "ref": "9~10번", "verdict": "bad", "quote": "\"2주면 소변 거품이…\" → \"한 달이면 밤에 잠 못 자는 일이 없어져요\"", "judge": "효과가 한 달에서 끝나 객단가를 높일 방법이 없음", "idea": "\"꾸준히 3달 섭취하면 당뇨 걱정 없이 살 수 있다\""}, {"name": "구매 유도", "ref": "11번", "quote": "\"여름 한정 44% 할인 선착순 200명\""}], "script": [{"t": "소변에 거품 끼기 시작했다면 지금 당장 멈추고 보세요", "a": "1. 일상생활 속에서 쉽게 경험할 수 있는 '소변에 거품'이라는 경험\n→ 타겟을 특정하여 관심을 끔\n2. '지금 당장 멈추고 보세요'\n→ 다음 장면을 궁금하게 만듦 → 영상의 다음 시청을 의도"}, {"t": "이거 그냥 넘기면 5년 안에 합병증으로 후회합니다.", "a": "1. '5년 안', '합병증', '후회' 사용\n→ 현재 문제를 방치 → 발생할 수 있는 심각한 문제 언급\n→ 심리적 불안감 → 문제를 해결하고 싶게 만듦"}, {"t": "당뇨인이 소변 거품을 방치하면 어떻게 되는지 아세요?", "a": "1. 의문문 사용\n→ 방치한 타겟이 겪을 미래를 상상하게 함\n→ 질문의 답이 다음에 나올 거라고 생각하게 만듦\n→ 다음 내용을 보게 만듦"}, {"t": "췌장이 당 독소에 절여져서 인슐린이 나오는 구멍이 하나씩 막혀갑니다.", "a": "1. 타겟이 문제를 방치했을 때의 상황이 나옴\n→ '절여진다', '막혀간다' 강력한 단어로 문제의 심각성 강조\n→ \"그러면 어떻게 되는 거지?\" 다음 내용 시청 강제"}, {"t": "구멍이 막힐수록 혈당은 더 안 잡히고, 손발은 점점 더 저려오고, 눈은 점점 더 뿌옇게 흐려지다가 결국 발가락부터 까맣게 썩어 들어가는 거예요.", "a": "1. 타겟의 일상생활에 지장이 갈 수 있는 문제 나열\n→ 문제를 방치하고 있는 타겟 → 심각한 상황에 놓일 수 있음\n→ 공포를 심고, 결핍을 강조 → 구매력 높임"}, {"t": "근데 이거 막는 방법이 있습니다. 췌장에 낀 당 독소만 빼내면 돼요.", "a": "1. '근데'\n→ 반전이 있음을 알림 → 타겟의 관심 집중\n2. 당뇨인 소변 거품 방치 > 췌장이 당 독소에 절여짐 > 인슐린 구멍이 막힘 > 췌장에 낀 독소를 뺌\n→ 인과관계 만듦 → 신뢰도 상승\n3. 문제 해결 방법 제시 → \"이렇게 하면 되겠구나\"라는 생각을 하게 만듦\n→ \"췌장에 낀 당 독소를 어떻게 뺄 수 있지?\" 생각 유도"}, {"t": "당 독소가 빠지면 막혔던 구멍이 뚫리면서 인슐린이 다시 쏟아져 나오거든요.", "a": "1. 근본적 문제 해결 방식 설명\n→ 인슐린이 나오는 구멍이 막히는 게 문제 → 그것이 해결됨\n2. '쏟아져'라는 표현\n→ 문제 해결 효과 극대화"}, {"t": "니프젠 스파이크 리듀코스 DNJ가 바로 그 역할을 하죠.", "a": "1. 직접적인 문제 해결 제품 등장\n→ 문제를 특정 제품이 해결 가능함을 알림\n→ 문제 해결 구조를 통해 얻은 신뢰 → 제품에게 전달 → 제품 자체의 신뢰 → 구매력 상승"}, {"t": "하루 한 알이면 당 독소가 오줌으로 싹 빠져나가고, 2주면 소변 거품이 개눈 감추듯 사라지기 시작해요.", "a": "1. '하루 한 알'\n→ 타겟에게 부담 X, 간편함 O → 소비자 니즈 충족\n→ 걱정했던 독소가 오줌으로 빠져나감 → 문제 해결 방식 설명\n2. '2주면', '개눈 감추듯'\n→ 구체적인 기간을 언급 → 신뢰를 더함\n→ 자극적인 표현 → 더욱 사실적 표현 가능 → 효과 강조"}, {"t": "한 달이면 발가락 썩을까 봐 밤에 잠 못 자는 일이 없어져요.", "a": "1. 구체적 기간 나열\n→ 기간별로 소비자가 얻을 수 있는 효과 제시 → 변화를 상상하게 만듦\n2. 극단적인 문제를 예시로 재강조\n→ 타겟의 불안함 극대화 → 구매 유도"}, {"t": "지금 여름 한정 44% 할인 선착순 200명만 가능하니 아래 링크에서 바로 잡으세요.", "a": "1. '한정', '선착순' 그리고 '44% 할인' 표현 사용\n→ 타겟을 FOMO 상태로 만듦 → 충동구매 유도"}], "source": {"label": "원본 기록 보기 (광고 영상 포함)", "url": "https://subsequent-liver-5a9.notion.site/260930_-6f118526b5a48327ae2c81eb2294d0bb"}}},
+   flow:{"target": "소변에 거품이 끼는 걸 본 적 있지만, 당뇨는 남 얘기라고 생각하던 사람", "video": {"src": "cases/ad_nifzen.mp4", "poster": "cases/ad_nifzen_poster.jpg", "credit": "출처: 니프젠 광고 (메타 광고 라이브러리)", "note": "분석 목적으로만 사용하며, 요청 시 즉시 삭제합니다."}, "steps": [{"name": "후킹", "ref": "1번", "time": 0, "verdict": "good", "lines": ["\"소변에 거품 끼기 시작했다면 지금 당장 멈추고 보세요\""], "judge": "당뇨인이 아니어도 누구나 한 번쯤 본 '소변 거품'으로 시작해서, 별생각 없던 사람도 \"어? 내 얘긴데?\" 하고 멈추게 만든다. 문제라고 생각해본 적 없는 일을 '지금 당장 멈추고 보세요'로 당장 확인해야 할 문제처럼 만들어 결핍을 만든다."}, {"name": "불안 키우기", "ref": "2~5번", "time": 3, "verdict": "good", "lines": ["\"이거 그냥 넘기면 5년 안에 합병증으로 후회합니다.\"", "\"당뇨인이 소변 거품을 방치하면 어떻게 되는지 아세요?\"", "\"췌장이 당 독소에 절여져서 인슐린이 나오는 구멍이 하나씩 막혀갑니다.\"", "\"구멍이 막힐수록 혈당은 더 안 잡히고, 손발은 점점 더 저려오고, 눈은 점점 더 뿌옇게 흐려지다가 결국 발가락부터 까맣게 썩어 들어가는 거예요.\""], "judge": "방치하면 어떻게 되는지 질문을 던진 뒤 '절여진다', '막혀간다', '썩어 들어간다' 같은 강한 단어로 답한다. 손발 저림, 흐려지는 눈처럼 실제로 느낄 법한 증상을 차례로 보여줘서 불안이 점점 커진다."}, {"name": "해결 원리", "ref": "6~7번", "time": 20, "lines": ["\"근데 이거 막는 방법이 있습니다. 췌장에 낀 당 독소만 빼내면 돼요.\"", "\"당 독소가 빠지면 막혔던 구멍이 뚫리면서 인슐린이 다시 쏟아져 나오거든요.\""]}, {"name": "제품 등장", "ref": "8번", "time": 27, "verdict": "bad", "lines": ["\"니프젠 스파이크 리듀코스 DNJ가 바로 그 역할을 하죠.\""], "pairs": [{"judge": "당 독소를 빼면 된다는 해결 구조가 잘 잡혀 있어서, 이 제품을 믿을 근거를 하나만 더 보여주면 설득력이 훨씬 커질 것 같다.", "idea": "\"**미국 당뇨인들 사이에서 난리 난 제품 성분을 그대로 가져온** 니프젠 스파이크 리듀코스 DNJ가 바로 그 역할을 하죠.\""}, {"judge": "앞에서 쌓은 해결 원리 덕분에 살 이유가 없진 않지만, 다른 제품이 아니라 굳이 이 제품이어야 하는 이유를 하나 더 붙이면 훨씬 분명해진다.", "idea": "\"**국내 최초 섭취형 당 독소 분해제,** 니프젠 스파이크 리듀코스 DNJ가 바로 그 역할을 하죠.\""}]}, {"name": "효과와 기간", "ref": "9~10번", "time": 30, "verdict": "bad", "lines": ["\"하루 한 알이면 당 독소가 오줌으로 싹 빠져나가고, 2주면 소변 거품이 개눈 감추듯 사라지기 시작해요.\"", "\"한 달이면 발가락 썩을까 봐 밤에 잠 못 자는 일이 없어져요.\""], "pairs": [{"verdict": "good", "judge": "'2주', '한 달'처럼 기간을 구체적으로 짚어서 효과가 차근차근 나타나는 모습을 그린다. 현실적인 경험처럼 들려서 신뢰가 더해진다."}, {"judge": "효과가 '한 달'에서 끝나는 게 조금 아쉽다. 4+2 구성은 가격을 싸 보이게 하려는 장치 같은데, 광고에서 먼저 \"오래 먹을수록 좋다\"는 이유를 주면 세트로 살 이유가 더 분명해질 것 같다.", "idea": "\"한 달이면 발가락 썩을까 봐 밤에 잠 못 자는 일이 없어지고, **꾸준히 3달 섭취하면 당뇨 걱정 없이 살 수 있어요.**\""}]}, {"name": "구매 유도", "ref": "11번", "time": 39, "lines": ["\"지금 여름 한정 44% 할인 선착순 200명만 가능하니 아래 링크에서 바로 잡으세요.\""]}], "script": [{"t": "소변에 거품 끼기 시작했다면 지금 당장 멈추고 보세요", "a": "1. 일상생활 속에서 쉽게 경험할 수 있는 '소변에 거품'이라는 경험\n→ 타겟을 특정하여 관심을 끔\n2. '지금 당장 멈추고 보세요'\n→ 다음 장면을 궁금하게 만듦 → 영상의 다음 시청을 의도"}, {"t": "이거 그냥 넘기면 5년 안에 합병증으로 후회합니다.", "a": "1. '5년 안', '합병증', '후회' 사용\n→ 현재 문제를 방치 → 발생할 수 있는 심각한 문제 언급\n→ 심리적 불안감 → 문제를 해결하고 싶게 만듦"}, {"t": "당뇨인이 소변 거품을 방치하면 어떻게 되는지 아세요?", "a": "1. 의문문 사용\n→ 방치한 타겟이 겪을 미래를 상상하게 함\n→ 질문의 답이 다음에 나올 거라고 생각하게 만듦\n→ 다음 내용을 보게 만듦"}, {"t": "췌장이 당 독소에 절여져서 인슐린이 나오는 구멍이 하나씩 막혀갑니다.", "a": "1. 타겟이 문제를 방치했을 때의 상황이 나옴\n→ '절여진다', '막혀간다' 강력한 단어로 문제의 심각성 강조\n→ \"그러면 어떻게 되는 거지?\" 다음 내용 시청 강제"}, {"t": "구멍이 막힐수록 혈당은 더 안 잡히고, 손발은 점점 더 저려오고, 눈은 점점 더 뿌옇게 흐려지다가 결국 발가락부터 까맣게 썩어 들어가는 거예요.", "a": "1. 타겟의 일상생활에 지장이 갈 수 있는 문제 나열\n→ 문제를 방치하고 있는 타겟 → 심각한 상황에 놓일 수 있음\n→ 공포를 심고, 결핍을 강조 → 구매력 높임"}, {"t": "근데 이거 막는 방법이 있습니다. 췌장에 낀 당 독소만 빼내면 돼요.", "a": "1. '근데'\n→ 반전이 있음을 알림 → 타겟의 관심 집중\n2. 당뇨인 소변 거품 방치 > 췌장이 당 독소에 절여짐 > 인슐린 구멍이 막힘 > 췌장에 낀 독소를 뺌\n→ 인과관계 만듦 → 신뢰도 상승\n3. 문제 해결 방법 제시 → \"이렇게 하면 되겠구나\"라는 생각을 하게 만듦\n→ \"췌장에 낀 당 독소를 어떻게 뺄 수 있지?\" 생각 유도"}, {"t": "당 독소가 빠지면 막혔던 구멍이 뚫리면서 인슐린이 다시 쏟아져 나오거든요.", "a": "1. 근본적 문제 해결 방식 설명\n→ 인슐린이 나오는 구멍이 막히는 게 문제 → 그것이 해결됨\n2. '쏟아져'라는 표현\n→ 문제 해결 효과 극대화"}, {"t": "니프젠 스파이크 리듀코스 DNJ가 바로 그 역할을 하죠.", "a": "1. 직접적인 문제 해결 제품 등장\n→ 문제를 특정 제품이 해결 가능함을 알림\n→ 문제 해결 구조를 통해 얻은 신뢰 → 제품에게 전달 → 제품 자체의 신뢰 → 구매력 상승"}, {"t": "하루 한 알이면 당 독소가 오줌으로 싹 빠져나가고, 2주면 소변 거품이 개눈 감추듯 사라지기 시작해요.", "a": "1. '하루 한 알'\n→ 타겟에게 부담 X, 간편함 O → 소비자 니즈 충족\n→ 걱정했던 독소가 오줌으로 빠져나감 → 문제 해결 방식 설명\n2. '2주면', '개눈 감추듯'\n→ 구체적인 기간을 언급 → 신뢰를 더함\n→ 자극적인 표현 → 더욱 사실적 표현 가능 → 효과 강조"}, {"t": "한 달이면 발가락 썩을까 봐 밤에 잠 못 자는 일이 없어져요.", "a": "1. 구체적 기간 나열\n→ 기간별로 소비자가 얻을 수 있는 효과 제시 → 변화를 상상하게 만듦\n2. 극단적인 문제를 예시로 재강조\n→ 타겟의 불안함 극대화 → 구매 유도"}, {"t": "지금 여름 한정 44% 할인 선착순 200명만 가능하니 아래 링크에서 바로 잡으세요.", "a": "1. '한정', '선착순' 그리고 '44% 할인' 표현 사용\n→ 타겟을 FOMO 상태로 만듦 → 충동구매 유도"}], "source": {"label": "원본 기록 보기 (광고 영상 포함)", "url": "https://subsequent-liver-5a9.notion.site/260930_-6f118526b5a48327ae2c81eb2294d0bb"}, "lead": "소변 거품 하나로 불안을 끝까지 끌고 가는 힘이 강한 광고. 제품이 등장할 때 믿을 만한 근거를 하나 더 붙이면 더 설득력 있을 것 같다."}},
   {color:'#1c1b17', c2:'#0f0f0d', eyebrow:'공정 02, 여성 다이어트 광고', title:'덱카닉정', date:'2026.10.01', score:'★★★★',
-   desc:'통념을 깨고 원리를 쉽게 푸는 힘은 강하지만, 정작 성분이 왜 효과적인지는 와닿지 않는 광고.',
+   desc:'통념을 깨고 어려운 원리를 쉽게 푸는 힘이 강한 광고. 제품이 등장할 때 성분이 왜 효과적인지까지 보여주면 더 설득력 있을 것 같다.',
    rows:[
     ['여자들이 남자보다 살 빼기 힘든 이유. 의지나 노력의 문제가 아닙니다','1. 성별에 따른 다이어트 난이도 차이 제시\n→ 기존 통념 ‘의지’, ‘노력’ 부정 → “왜지?”라는 생각이 들게 함\n2. 다이어트가 고민인 여성을 타겟으로 지정 → 집중 증가'],
     ['애초에 인체학적으로 세팅 값이 다르기 때문이죠.','1. 과학적 근거를 기반으로 다름을 말함 → 설득력, 호기심 증가'],
@@ -1133,9 +1198,9 @@ var CASES = [
    good:['여성의 의지나 노력이 문제가 아니라고 해서 궁금하게 만듦','기존 통념 파괴로 자사 제품만의 특별함을 어필','불합리함을 어필해 제품을 더욱 효과적으로 보이게 만듦','과장 광고 비판으로 말에 신뢰를 더함'],
    bad:['대사 활성화 스위치를 ‘빠르게’ 켜는 것이 왜 중요한지 잘 모르겠음','AMPK 효소와 알파CD가 신호를 빠르게 줄 수 있다는 것이 와닿지 않음','몸에 필요한 필수 지방까지 꺼내 쓴다는 건 오해의 소지가 있음'],
    fix:['“이 신호를 효과적으로 주는 성분인 AMPK 효소와 지방 분해에 탁월한 알파CD가 고함량으로 들어간 데카닉을 먹어주는 겁니다.”','“급기야 ~ 시작합니다” 부분 삭제'],
-   flow:{"target": "다이어트를 반복해도 살이 잘 안 빠지는 여성", "steps": [{"name": "후킹", "ref": "1번", "verdict": "good", "quote": "\"여자들이 남자보다 살 빼기 힘든 이유. 의지나 노력의 문제가 아닙니다\"", "judge": "의지·노력의 문제가 아니라고 해 \"왜지?\" 궁금하게 만듦"}, {"name": "원인 설명", "ref": "2~4번", "verdict": "good", "quote": "\"인체학적으로 세팅 값이 다르기 때문이죠\" → \"여성의 몸은 어? 일단 저장해 보자\" → \"설계 자체가 다르다는 겁니다\"", "judge": "기존 통념을 깨서, 이 제품만의 특별함을 말할 바탕을 만듦"}, {"name": "해결 원리", "ref": "5~6번", "verdict": "good", "quote": "\"이 불합리한 게임에도 치트키가 하나 있다는 겁니다\" → \"바로 대사 활성화 스위치를 켜주는 건데요\"", "judge": "불합리함을 강조해 해결책이 더 효과적으로 보이게 하고, 복잡한 원리를 '스위치'로 쉽게 풂"}, {"name": "제품 등장", "ref": "7~9번", "verdict": "bad", "quote": "\"이 신호를 가장 빠르게 줄 수 있는 게… AMPK효소와 알파 CD가 고함량으로 들어간 데카닉\" → \"급기야 몸에 필요한 필수 지방까지 꺼내 쓰기 시작합니다\"", "pairs": [{"judge": "스위치를 '빠르게' 켜는 게 왜 중요한지, 두 성분이 왜 신호를 빠르게 주는지 와닿지 않음", "idea": "\"이 신호를 효과적으로 주는 성분인 AMPK효소와 지방분해에 탁월한 알파CD가 고함량으로 들어간 데카닉을 먹어주는 겁니다.\""}, {"judge": "몸에 필요한 필수 지방까지 꺼내 쓴다는 건 오해의 소지가 있음", "idea": "\"급기야 몸에 필요한 필수 지방까지 꺼내 쓰기 시작합니다\" 부분 삭제"}]}, {"name": "신뢰 쌓기", "ref": "10~11번", "verdict": "good", "quote": "\"몇 달에 몇 키로 빠진다는 과장된 말은 하지 않겠습니다\"", "judge": "다른 광고의 과장을 비판해 말에 신뢰를 더함"}, {"name": "구매 유도", "ref": "12번", "quote": "\"매일 아침 공복 데카닉으로 대사 활성 스위치 켜는 것을 잊지 마세요\""}], "script": [{"t": "여자들이 남자보다 살 빼기 힘든 이유. 의지나 노력의 문제가 아닙니다", "a": "1. 성별에 따른 다이어트 난이도 차이 제시\n→ 기존 통념 '의지', '노력' 부정\n→ \"왜지?\"라는 생각이 들게 함\n2. 다이어트 고민인 여성을 타겟 지정 → 특정 타겟 집중 증가"}, {"t": "애초에 인체학적으로 세팅 값이 다르기 때문이죠.", "a": "1. 과학적 근거를 기반으로 다름을 말함\n→ 설득력, 호기심 증가"}, {"t": "남성의 몸은 에너지가 들어오면 오? 연료네 당장 써버리자 하고 바로 써버리는 반면, 여성의 몸은 어? 일단 저장해 보자 언제 필요할지 모르잖아? 하고 이상한 판단을 해버립니다.", "a": "1. 성별에 따른 몸의 에너지 접근 방식을 비교\n→ 앞 문장 설명 + 근거가 되어 뒷받침\n→ 여성의 다이어트 실패 = 몸의 이상한 판단이 원인 → 절망\n→ 몸에서 일어나는 일을 말을 하듯 설명함 → 이해하기 쉬움"}, {"t": "그러니까 많이 먹어서 문제가 아니라 애초에 설계 자체가 다르다는 겁니다.", "a": "1. \"많이 먹어서\"(기존 통념) → \"설계 자체가 다름\"(기존 통념 파괴)\n→ 새로운 시각으로 보도록 유도"}, {"t": "그런데 다행인 건 이 불합리한 게임에도 치트키가 하나 있다는 겁니다.", "a": "1. 불합리함을 바꿀 방법이 있음을 알림\n→ 상황 전환"}, {"t": "바로 대사 활성화 스위치를 켜주는 건데요. 일단 저장부터 하고 보려는 몸에게 지방을 마음껏 써도 된다는 신호를 주는 겁니다.", "a": "1. 불합리한 상황을 뒤바꿀 수 있는 방법 제시\n→ 해결되지 않는 문제 X → \"그래서 어떻게 하는 건데?\"\n2. 복잡한 방식을 '스위치 켬'이라고 단순화\n→ 이해하기 쉬움 → 설득이 쉬워짐 → 구매 확률 증가"}, {"t": "이 신호를 가장 빠르게 줄 수 있는 게 바로 아침 공복 상태에 AMPK효소와 알파 CD가 고함량으로 들어간 데카닉을 먹어주는 겁니다.", "a": "1. 제품 등장 + 성분과 효과 제시\n→ 스위치 ON = 제품 섭취\n→ 제품이 신호를 가장 빠르게 줌 → 효과가 빠름 → 소비자 니즈 충족\n→ 고함량 제품 = 데카닉 → 효과가 좋음 → 소비자 니즈 충족"}, {"t": "대사 활성 성분인 데카닉이 들어가는 순간, 여성의 몸에서는 몸에 축적된 지방을 쓰라는 지시가 내려지고 급기야 몸에 필요한 필수 지방까지 꺼내 쓰기 시작합니다.", "a": "1. 제품 섭취 후 몸속에서 일어나는 일 설명\n→ 제품이 문제를 직접적으로 해결하는 원리 설명 → 과학적 근거 → 신뢰도 상승"}, {"t": "대사 활성 스위치가 켜진 상태이기 때문에 몸은 계속해서 지방을 태우는 상태가 되죠.", "a": "1. 제품 섭취가 지방을 대하는 상태를 변화시킴\n→ 효과 좋음 어필"}, {"t": "몇 달에 몇 키로 빠진다는 과장된 말은 하지 않겠습니다. 그건 사람마다 다르니까요.", "a": "1. 다른 제품의 과장 광고 비판 → \"우리는 과장 안 해\"\n→ 자사 제품 차별화 → 신뢰도 상승"}, {"t": "다만 한 가지는 분명합니다. 몸이 지방을 쓰는 대사 활성 스위치를 켜면 결과는 그다음에 따라옵니다.", "a": "1. '다만 한 가지는 분명' → 확신을 줌\n2. 제품의 효과 = 다이어트 결과는 따라옴\n→ 과학적 근거에 따라서 살이 빠짐 → 소비자가 듣고 싶은 말"}, {"t": "기억할 건 딱 하나입니다. 매일 아침 공복 데카닉으로 대사 활성 스위치 켜는 것을 잊지 마세요.", "a": "1. '기억할 건 딱 하나' → 집중시킴\n2. '매일 아침 공복 데카닉' = '대사 활성 스위치 켬'\n→ 여성 다이어트에 필수임을 강조\n→ 간편함을 어필함 → 소비자 니즈 충족"}], "source": {"label": "원본 기록 보기 (광고 영상 포함)", "url": "https://subsequent-liver-5a9.notion.site/261001_-27218526b5a48238b53d01ee58b739ba"}}},
+   flow:{"target": "다이어트를 해도 살이 잘 안 빠지는 여성", "lead": "통념을 깨고 어려운 원리를 쉽게 푸는 힘이 강한 광고. 제품이 등장할 때 성분이 왜 효과적인지까지 보여주면 더 설득력 있을 것 같다.", "video": {"src": "cases/ad_dexcanic.mp4", "poster": "cases/ad_dexcanic_poster.jpg", "credit": "출처: 덱카닉 광고 (메타 광고 라이브러리)", "note": "분석 목적으로만 사용하며, 요청 시 즉시 삭제합니다."}, "steps": [{"name": "후킹", "ref": "1번", "time": 0, "verdict": "good", "lines": ["\"여자들이 남자보다 살 빼기 힘든 이유. 의지나 노력의 문제가 아닙니다\""], "judge": "살이 잘 안 빠지는 여성이 가장 듣고 싶은 말, '의지나 노력의 문제가 아니다'로 멈추게 만든다. 바로 뒤에 '인체학적으로 세팅 값이 다르기 때문'이라고 이유를 이어 붙여서 다음 내용까지 보게 만든다."}, {"name": "원인 설명", "ref": "2~4번", "time": 3, "verdict": "good", "lines": ["\"애초에 인체학적으로 세팅 값이 다르기 때문이죠.\"", "\"남성의 몸은 에너지가 들어오면 오? 연료네 당장 써버리자 하고 바로 써버리는 반면, 여성의 몸은 어? 일단 저장해 보자 언제 필요할지 모르잖아? 하고 이상한 판단을 해버립니다.\"", "\"그러니까 많이 먹어서 문제가 아니라 애초에 설계 자체가 다르다는 겁니다.\""], "judge": "남자 몸과 여자 몸이 에너지를 어떻게 다루는지 말하듯 비교해서 어려운 원리를 쉽게 이해시킨다. '많이 먹어서'라는 기존 통념을 '설계 자체가 다르다'로 깨면서, 이걸 해결할 특별한 방법이 있을 거라는 기대를 만든다."}, {"name": "해결 원리", "ref": "5~6번", "time": 15, "verdict": "good", "lines": ["\"그런데 다행인 건 이 불합리한 게임에도 치트키가 하나 있다는 겁니다.\"", "\"바로 대사 활성화 스위치를 켜주는 건데요. 일단 저장부터 하고 보려는 몸에게 지방을 마음껏 써도 된다는 신호를 주는 겁니다.\""], "judge": "앞에서 강조한 불합리함을 '치트키'로 뒤집어서 해결책이 더 효과적으로 보이게 한다. 복잡한 대사 작용을 '스위치를 켠다'로 단순하게 바꿔서 바로 이해된다."}, {"name": "제품 등장", "ref": "7~9번", "time": 25, "verdict": "bad", "lines": ["\"이 신호를 가장 빠르게 줄 수 있는 게 바로 아침 공복 상태에 AMPK효소와 알파 CD가 고함량으로 들어간 데카닉을 먹어주는 겁니다.\"", "\"대사 활성 성분인 데카닉이 들어가는 순간, 여성의 몸에서는 몸에 축적된 지방을 쓰라는 지시가 내려지고 급기야 몸에 필요한 필수 지방까지 꺼내 쓰기 시작합니다.\"", "\"대사 활성 스위치가 켜진 상태이기 때문에 몸은 계속해서 지방을 태우는 상태가 되죠.\""], "pairs": [{"judge": "'가장 빠르게'도 맥락상 이해는 되지만, 왜 빠르게 켜는 게 중요한지는 궁금증으로 남는다. '가장 효과적으로'라고 하고 두 성분이 어떤 역할을 하는지 붙여주면 더 완성도 있을 것 같다.", "idea": "\"이 신호를 **효과적으로 주는 성분인 AMPK효소와 지방분해에 탁월한 알파CD가** 고함량으로 들어간 데카닉을 먹어주는 겁니다.\""}, {"judge": "'필수 지방까지 꺼내 쓴다'는 표현은 효과가 세다는 걸 잘 보여주지만, 몸에 무리가 가는 건 아닐까 하는 오해가 생길 수 있어서 빼는 쪽이 더 안전해 보인다.", "idea": "\"대사 활성 성분인 데카닉이 들어가는 순간, 여성의 몸에서는 몸에 축적된 지방을 쓰라는 지시가 **내려집니다.**\"", "ideaNote": "뒷부분 '급기야 몸에 필요한 필수 지방까지 꺼내 쓰기 시작합니다' 삭제"}]}, {"name": "신뢰 쌓기", "ref": "10~11번", "time": 43, "verdict": "good", "lines": ["\"몇 달에 몇 키로 빠진다는 과장된 말은 하지 않겠습니다. 그건 사람마다 다르니까요.\"", "\"다만 한 가지는 분명합니다. 몸이 지방을 쓰는 대사 활성 스위치를 켜면 결과는 그다음에 따라옵니다.\""], "judge": "다른 다이어트 광고의 과장을 먼저 꼬집어서 \"여긴 과장 안 하네\" 하는 믿음을 준다. 그 위에 '결과는 따라온다'고 확신을 줘서, 소비자가 듣고 싶은 말로 마무리한다."}, {"name": "구매 유도", "ref": "12번", "time": 50, "verdict": "good", "lines": ["\"기억할 건 딱 하나입니다. 매일 아침 공복 데카닉으로 대사 활성 스위치 켜는 것을 잊지 마세요.\""], "judge": "앞에서 원리를 다 풀어서 '대사 활성 스위치'가 이해된 상태에서, '기억할 건 딱 하나'로 다시 집중시킨다. '매일 아침 공복 데카닉 = 대사 활성 스위치 켜기'로 묶어서, 데카닉을 먹는 것 자체를 여성 다이어트와 같은 선상에 올려놓는다. 매일 아침 한 번이면 된다는 간편함도 함께 전달된다."}], "script": [{"t": "여자들이 남자보다 살 빼기 힘든 이유. 의지나 노력의 문제가 아닙니다", "a": "1. 성별에 따른 다이어트 난이도 차이 제시\n→ 기존 통념 '의지', '노력' 부정\n→ \"왜지?\"라는 생각이 들게 함\n2. 다이어트 고민인 여성을 타겟 지정 → 특정 타겟 집중 증가"}, {"t": "애초에 인체학적으로 세팅 값이 다르기 때문이죠.", "a": "1. 과학적 근거를 기반으로 다름을 말함\n→ 설득력, 호기심 증가"}, {"t": "남성의 몸은 에너지가 들어오면 오? 연료네 당장 써버리자 하고 바로 써버리는 반면, 여성의 몸은 어? 일단 저장해 보자 언제 필요할지 모르잖아? 하고 이상한 판단을 해버립니다.", "a": "1. 성별에 따른 몸의 에너지 접근 방식을 비교\n→ 앞 문장 설명 + 근거가 되어 뒷받침\n→ 여성의 다이어트 실패 = 몸의 이상한 판단이 원인 → 절망\n→ 몸에서 일어나는 일을 말을 하듯 설명함 → 이해하기 쉬움"}, {"t": "그러니까 많이 먹어서 문제가 아니라 애초에 설계 자체가 다르다는 겁니다.", "a": "1. \"많이 먹어서\"(기존 통념) → \"설계 자체가 다름\"(기존 통념 파괴)\n→ 새로운 시각으로 보도록 유도"}, {"t": "그런데 다행인 건 이 불합리한 게임에도 치트키가 하나 있다는 겁니다.", "a": "1. 불합리함을 바꿀 방법이 있음을 알림\n→ 상황 전환"}, {"t": "바로 대사 활성화 스위치를 켜주는 건데요. 일단 저장부터 하고 보려는 몸에게 지방을 마음껏 써도 된다는 신호를 주는 겁니다.", "a": "1. 불합리한 상황을 뒤바꿀 수 있는 방법 제시\n→ 해결되지 않는 문제 X → \"그래서 어떻게 하는 건데?\"\n2. 복잡한 방식을 '스위치 켬'이라고 단순화\n→ 이해하기 쉬움 → 설득이 쉬워짐 → 구매 확률 증가"}, {"t": "이 신호를 가장 빠르게 줄 수 있는 게 바로 아침 공복 상태에 AMPK효소와 알파 CD가 고함량으로 들어간 데카닉을 먹어주는 겁니다.", "a": "1. 제품 등장 + 성분과 효과 제시\n→ 스위치 ON = 제품 섭취\n→ 제품이 신호를 가장 빠르게 줌 → 효과가 빠름 → 소비자 니즈 충족\n→ 고함량 제품 = 데카닉 → 효과가 좋음 → 소비자 니즈 충족"}, {"t": "대사 활성 성분인 데카닉이 들어가는 순간, 여성의 몸에서는 몸에 축적된 지방을 쓰라는 지시가 내려지고 급기야 몸에 필요한 필수 지방까지 꺼내 쓰기 시작합니다.", "a": "1. 제품 섭취 후 몸속에서 일어나는 일 설명\n→ 제품이 문제를 직접적으로 해결하는 원리 설명 → 과학적 근거 → 신뢰도 상승"}, {"t": "대사 활성 스위치가 켜진 상태이기 때문에 몸은 계속해서 지방을 태우는 상태가 되죠.", "a": "1. 제품 섭취가 지방을 대하는 상태를 변화시킴\n→ 효과 좋음 어필"}, {"t": "몇 달에 몇 키로 빠진다는 과장된 말은 하지 않겠습니다. 그건 사람마다 다르니까요.", "a": "1. 다른 제품의 과장 광고 비판 → \"우리는 과장 안 해\"\n→ 자사 제품 차별화 → 신뢰도 상승"}, {"t": "다만 한 가지는 분명합니다. 몸이 지방을 쓰는 대사 활성 스위치를 켜면 결과는 그다음에 따라옵니다.", "a": "1. '다만 한 가지는 분명' → 확신을 줌\n2. 제품의 효과 = 다이어트 결과는 따라옴\n→ 과학적 근거에 따라서 살이 빠짐 → 소비자가 듣고 싶은 말"}, {"t": "기억할 건 딱 하나입니다. 매일 아침 공복 데카닉으로 대사 활성 스위치 켜는 것을 잊지 마세요.", "a": "1. '기억할 건 딱 하나' → 집중시킴\n2. '매일 아침 공복 데카닉' = '대사 활성 스위치 켬'\n→ 여성 다이어트에 필수임을 강조\n→ 간편함을 어필함 → 소비자 니즈 충족"}], "source": {"label": "원본 기록 보기 (광고 영상 포함)", "url": "https://subsequent-liver-5a9.notion.site/261001_-27218526b5a48238b53d01ee58b739ba"}}},
   {color:'#1c1b17', c2:'#0f0f0d', eyebrow:'공정 03, 간 건강 광고', title:'간 프로텍션', date:'2026.10.02', score:'★★★★',
-   desc:'\'간엔 밀크씨슬\'이라는 통념을 뒤집어 가치를 키우는 힘은 강하지만, 처음과 끝에서 정작 \'피곤한 사람\'을 붙잡지 못하는 광고.',
+   desc:'\'간엔 밀크씨슬\'이라는 익숙한 상식을 뒤집어 제품 가치를 키우는 힘이 강한 광고. 처음과 끝에서 \'피곤한 사람\'을 조금 더 직접 짚어주면 더 좋을 것 같다.',
    rows:[
     ['제가 살면서 제일 후회한 게 뭔 줄 아세요? 바로 이거를 이제야 안 거에요.','1. ‘살면서 제일 후회’\n→ 강한 표현으로 타겟의 궁금증 증폭\n2. 의문문을 통해 질문\n→ “그 정도로 후회할 게 뭐가 있지?” 생각 유도 → 영상 시청 유도\n3. ‘바로 이거를 이제야 안 거에요.’\n→ 빨리 알았으면 좋았을 만큼 가치 있음을 알림'],
     ['그동안 밀크씨슬만 먹으면 되겠지 하고 냅뒀는데, 계속 간이 썩어가는 중이었어요.','1. “밀크씨슬만 먹으면 문제없다” (기존 통념)\n→ “간이 썩어가는 중이었다” (기존 통념을 깸)\n→ 밀크씨슬로는 충분하지 않다는 새로운 사실을 전달해 불안감을 줌'],
@@ -1150,9 +1215,9 @@ var CASES = [
    good:['대부분이 생각하는 ‘간에는 밀크씨슬’을 제시하고, 제품이 밀크씨슬보다 압도적인 수치의 효과라는 것을 어필해 가치를 높임','‘후회’, ‘5일’, ‘20년’, ‘호랑이 풀’ 같은 강력한 단어로 관심을 끔','평소 느꼈던 문제를 ‘간 때문이다’라고 정의하고 섭취 후 모습을 상상하게 함','가치를 계속 올리다가 마지막에 만원대 가격을 말해 합리적인 소비라는 인식을 줌'],
    bad:['첫 문장의 단어와 의문문은 좋지만 명확한 타겟 지정이 없어 초반 이탈 가능성이 있음','소비자가 필요로 하는 건 ‘간의 건강함’이 아니라 ‘피곤하지 않음’이기에 마지막 문장은 더 직관적인 표현이 맞음'],
    fix:['“매일 밀크씨슬 먹는데도 피곤하신 분 있나요? 저도 이걸 몰랐습니다.”','“매일 피곤한 게 당연해졌다면, 이제 달라진 하루를 직접 느껴보세요.”'],
-   flow:{"target": "간 영양제를 챙겨 먹는데도 계속 피곤한 사람", "steps": [{"name": "후킹", "ref": "1번", "verdict": "bad", "quote": "\"제가 살면서 제일 후회한 게 뭔 줄 아세요? 바로 이거를 이제야 안 거예요.\"", "judge": "강한 단어와 질문은 좋지만, 타겟이 명확하지 않아 초반에 이탈할 수 있음", "idea": "\"매일 밀크씨슬 먹는데도 피곤하신 분 있나요? 저도 이걸 몰랐습니다.\""}, {"name": "통념 깨기", "ref": "2~3번", "verdict": "good", "quote": "\"밀크씨슬만 먹으면 되겠지 하고 냅뒀는데\" → \"호랑이 풀에서 추출한 티코사이드… 무려 밀크씨슬 1520% 효과래요\"", "judge": "모두가 아는 '간엔 밀크씨슬'을 꺼내고, 압도적인 수치로 제품 가치를 높임"}, {"name": "공감", "ref": "4번", "verdict": "good", "quote": "\"매일 졸리고 피곤하고 안색도 퀭하고 전부 간이 찌든 상태라 그런 거였나 봐요\"", "judge": "평소 느끼던 불편함을 '간 때문'이라고 정의해 \"내 이야기잖아?\"라고 느끼게 함"}, {"name": "효과", "ref": "5~8번", "verdict": "good", "quote": "\"5일 되니까 비싼 링거 맞은 거 마냥\" → \"20년 전으로 돌아간 거 같아요\" → \"하루 4시간 자고 안 피곤한 거 있죠?\"", "judge": "'5일', '20년' 같은 강한 단어로 먹은 뒤의 모습을 상상하게 함"}, {"name": "가격", "ref": "9번", "verdict": "good", "quote": "\"단돈 만원대로 부담도 없더라고요\"", "judge": "가치를 계속 올린 뒤 마지막에 가격을 보여줘 합리적인 소비로 느끼게 함"}, {"name": "구매 유도", "ref": "10번", "verdict": "bad", "quote": "\"간이 건강한 게 뭔지 제대로 느껴보고 싶다면 꼭 한번 먹어보세요.\"", "judge": "소비자가 원하는 건 '간 건강'이 아니라 '피곤하지 않음'이라 더 직관적인 표현이 필요함", "idea": "\"매일 피곤한 게 당연해졌다면, 이제 달라진 하루를 직접 느껴보세요.\""}], "script": [{"t": "제가 살면서 제일 후회한 게 뭔 줄 아세요? 바로 이거를 이제야 안 거예요.", "a": "1. '살면서 제일 후회'\n→ 강한 표현 사용해 타겟의 궁금증 증폭\n2. 의문문을 통해 질문\n→ \"그 정도로 강하게 후회할 게 뭐가 있지?\"라는 생각 유도 → 영상 시청 유도\n3. '바로 이거를 이제야 안 거예요'\n→ 빨리 알았으면 좋았을 만큼 가치 있음을 알림"}, {"t": "그동안 밀크씨슬만 먹으면 되겠지 하고 냅뒀는데, 계속 간이 썩어가는 중이었어요.", "a": "1. \"밀크씨슬만 먹으면 문제없다\"(기존 통념)\n→ \"간이 썩어가는 중이었다\"(기존 통념을 깸)\n→ 밀크씨슬로는 충분하지 않다는 새로운 사실을 전달해 불안감을 줌"}, {"t": "근데 여기엔 호랑이 풀에서 추출한 티코사이드라는 성분이 들어있는데, 무려 밀크씨슬 1520% 효과래요.", "a": "1. '근데' → 새로운 사실 등장\n2. '병풀'이 아닌 '호랑이 풀' 사용\n→ 의도적으로 더 강한 이미지인 별칭을 사용 → 효과가 더 좋아 보이게 만듦\n3. 추출 성분 '티코사이드'\n→ 간에 좋다고 모두가 알고 있는 '밀크씨슬'의 1520%라는 정보 전달\n→ 효과가 더욱 크게 보이게 만듦"}, {"t": "그동안 매일 졸리고 피곤하고 안색도 퀭하고 전부 간이 찌든 상태라 그런 거였나 봐요.", "a": "1. 타겟의 일상생활 속 경험한 문제 제시\n→ \"내 이야기잖아?\" 생각이 들게 만듦\n2. 일상생활 속 불편함 = 간이 찌든 상태\n→ \"간을 빨리 회복시켜야겠다\" 생각이 들게 만듦"}, {"t": "진짜 이거 먹고 5일 되니까 비싼 링거 맞은 거 마냥 매일매일이 쌩쌩해요.", "a": "1. 구체적 기간 제시\n→ '5일'이라는 짧은 기간 만에 가능함 어필\n2. 짧은 기간 안에 볼 수 있는 효과 제시\n→ '비싼 링거'로 효과를 체감시키면서, '쌩쌩함' 어필 → 소비자 니즈 충족"}, {"t": "이게 먹기만 하면 염증과 찌꺼기로 뒤덮여 있던 간을 싹 씻어줘서 몸에 독소를 싹 다 빼준대요.", "a": "1. 현재 타겟의 간 상태 상기시킴\n→ 염증, 찌꺼기로 뒤덮임 → 결핍도 증가 → 구매력 상승\n2. 제품의 효과 쉬운 말로 설명\n→ 직관적으로 와닿게 만듦"}, {"t": "거기에 죽어있던 간세포까지 활성화해주니까 저 진짜 20년 전으로 돌아간 거 같아요.", "a": "1. 제품의 효과 추가 제시\n2. '20년 전' → 단순히 피로 풀림이 아님을 언급 → 소비자가 듣고 싶은 말"}, {"t": "요즘 하루 4시간 자고 안 피곤한 거 있죠?", "a": "1. '4시간' → 구체적 시간 언급 → 효과가 좋음 어필\n2. '20년 전으로 돌아감'을 직관적으로 나타냄"}, {"t": "근데 심지어 단돈 만원대로 부담도 없더라고요.", "a": "1. '심지어', '단돈'\n→ 가격이 저렴함을 강조\n2. 효과 좋음 → 단돈 만원대 → 안 살 이유가 없음 → 구매력 높임\n3. '비싼 링거'와 대비되어 가격적 이득이 강조됨"}, {"t": "간이 건강한 게 뭔지 제대로 느껴보고 싶다면 꼭 한번 먹어보세요.", "a": "1. 앞에서 20년 전 모습을 상상하게 만들었기에 더욱 효과적임\n2. 자연스럽게 사게 만듦"}], "source": {"label": "원본 기록 보기 (광고 영상 포함)", "url": "https://subsequent-liver-5a9.notion.site/261002_-e4718526b5a483ed955081239da93f26"}}},
+   flow:{"target": "간 영양제를 챙겨 먹는데도 매일 피곤한 사람", "lead": "'간엔 밀크씨슬'이라는 익숙한 상식을 뒤집어 제품 가치를 키우는 힘이 강한 광고. 처음과 끝에서 '피곤한 사람'을 조금 더 직접 짚어주면 더 좋을 것 같다.", "video": {"src": "cases/ad_liver.mp4", "poster": "cases/ad_liver_poster.jpg", "credit": "출처: 솔티스 광고 (메타 광고 라이브러리)", "note": "분석 목적으로만 사용하며, 요청 시 즉시 삭제합니다."}, "steps": [{"name": "후킹", "ref": "1번", "time": 0, "verdict": "bad", "lines": ["\"제가 살면서 제일 후회한 게 뭔 줄 아세요? 바로 이거를 이제야 안 거예요.\""], "pairs": [{"verdict": "good", "judge": "'살면서 제일 후회한 게 뭔 줄 아세요?'라는 강한 질문으로 \"그 정도로 후회할 게 뭐지?\" 하고 궁금하게 만든다."}, {"judge": "궁금증은 충분하지만, 누구를 위한 광고인지 바로 드러나지 않아서 초반에 넘겨버릴 수 있다는 게 조금 아쉽다.", "idea": "\"**매일 밀크씨슬 먹는데도 피곤하신 분 있나요? 저도 이걸 몰랐습니다.**\""}]}, {"name": "통념 깨기", "ref": "2~3번", "time": 4, "verdict": "good", "lines": ["\"그동안 밀크씨슬만 먹으면 되겠지 하고 냅뒀는데, 계속 간이 썩어가는 중이었어요.\"", "\"근데 여기엔 호랑이 풀에서 추출한 티코사이드라는 성분이 들어있는데, 무려 밀크씨슬 1520% 효과래요.\""], "judge": "대부분이 알고 있는 '간엔 밀크씨슬'을 먼저 꺼낸 뒤 '그래도 간이 썩어가고 있었다'로 뒤집는다. 밀크씨슬의 1520%라는 숫자와, '병풀' 대신 '호랑이 풀'이라는 강한 별칭으로 제품 가치를 확 끌어올린다."}, {"name": "공감", "ref": "4번", "time": 14, "verdict": "good", "lines": ["\"그동안 매일 졸리고 피곤하고 안색도 퀭하고 전부 간이 찌든 상태라 그런 거였나 봐요.\""], "judge": "매일 졸리고 피곤하고 안색이 퀭한, 누구나 겪는 불편함을 '간이 찌든 상태라 그런 거'라고 정의해서 \"내 얘기잖아?\" 하고 느끼게 만든다."}, {"name": "효과", "ref": "5~8번", "time": 18, "verdict": "good", "lines": ["\"진짜 이거 먹고 5일 되니까 비싼 링거 맞은 거 마냥 매일매일이 쌩쌩해요.\"", "\"이게 먹기만 하면 염증과 찌꺼기로 뒤덮여 있던 간을 싹 씻어줘서 몸에 독소를 싹 다 빼준대요.\"", "\"거기에 죽어있던 간세포까지 활성화해주니까 저 진짜 20년 전으로 돌아간 거 같아요.\"", "\"요즘 하루 4시간 자고 안 피곤한 거 있죠?\""], "judge": "'5일', '비싼 링거', '20년 전', '하루 4시간'처럼 구체적이고 강한 말로, 먹은 뒤 달라진 모습을 상상하게 만든다."}, {"name": "가격", "ref": "9번", "time": 34, "verdict": "good", "lines": ["\"근데 심지어 단돈 만원대로 부담도 없더라고요.\""], "judge": "가치를 계속 올린 뒤 마지막에 '단돈 만원대'를 꺼내서, 앞의 '비싼 링거'와 대비되며 안 살 이유가 없는 합리적인 소비로 느끼게 한다."}, {"name": "구매 유도", "ref": "10번", "time": 36, "verdict": "bad", "lines": ["\"간이 건강한 게 뭔지 제대로 느껴보고 싶다면 꼭 한번 먹어보세요.\""], "pairs": [{"verdict": "good", "judge": "앞에서 '20년 전'처럼 달라진 모습을 상상하게 만든 덕분에 자연스럽게 사게 만든다."}, {"judge": "다만 소비자가 원하는 건 '간 건강'보다 '피곤하지 않은 하루'라서, 마지막 말도 그쪽으로 맞추면 더 직관적일 것 같다.", "idea": "\"**매일 피곤한 게 당연해졌다면, 이제 달라진 하루를 직접 느껴보세요.**\""}]}], "script": [{"t": "제가 살면서 제일 후회한 게 뭔 줄 아세요? 바로 이거를 이제야 안 거예요.", "a": "1. '살면서 제일 후회'\n→ 강한 표현 사용해 타겟의 궁금증 증폭\n2. 의문문을 통해 질문\n→ \"그 정도로 강하게 후회할 게 뭐가 있지?\"라는 생각 유도 → 영상 시청 유도\n3. '바로 이거를 이제야 안 거예요'\n→ 빨리 알았으면 좋았을 만큼 가치 있음을 알림"}, {"t": "그동안 밀크씨슬만 먹으면 되겠지 하고 냅뒀는데, 계속 간이 썩어가는 중이었어요.", "a": "1. \"밀크씨슬만 먹으면 문제없다\"(기존 통념)\n→ \"간이 썩어가는 중이었다\"(기존 통념을 깸)\n→ 밀크씨슬로는 충분하지 않다는 새로운 사실을 전달해 불안감을 줌"}, {"t": "근데 여기엔 호랑이 풀에서 추출한 티코사이드라는 성분이 들어있는데, 무려 밀크씨슬 1520% 효과래요.", "a": "1. '근데' → 새로운 사실 등장\n2. '병풀'이 아닌 '호랑이 풀' 사용\n→ 의도적으로 더 강한 이미지인 별칭을 사용 → 효과가 더 좋아 보이게 만듦\n3. 추출 성분 '티코사이드'\n→ 간에 좋다고 모두가 알고 있는 '밀크씨슬'의 1520%라는 정보 전달\n→ 효과가 더욱 크게 보이게 만듦"}, {"t": "그동안 매일 졸리고 피곤하고 안색도 퀭하고 전부 간이 찌든 상태라 그런 거였나 봐요.", "a": "1. 타겟의 일상생활 속 경험한 문제 제시\n→ \"내 이야기잖아?\" 생각이 들게 만듦\n2. 일상생활 속 불편함 = 간이 찌든 상태\n→ \"간을 빨리 회복시켜야겠다\" 생각이 들게 만듦"}, {"t": "진짜 이거 먹고 5일 되니까 비싼 링거 맞은 거 마냥 매일매일이 쌩쌩해요.", "a": "1. 구체적 기간 제시\n→ '5일'이라는 짧은 기간 만에 가능함 어필\n2. 짧은 기간 안에 볼 수 있는 효과 제시\n→ '비싼 링거'로 효과를 체감시키면서, '쌩쌩함' 어필 → 소비자 니즈 충족"}, {"t": "이게 먹기만 하면 염증과 찌꺼기로 뒤덮여 있던 간을 싹 씻어줘서 몸에 독소를 싹 다 빼준대요.", "a": "1. 현재 타겟의 간 상태 상기시킴\n→ 염증, 찌꺼기로 뒤덮임 → 결핍도 증가 → 구매력 상승\n2. 제품의 효과 쉬운 말로 설명\n→ 직관적으로 와닿게 만듦"}, {"t": "거기에 죽어있던 간세포까지 활성화해주니까 저 진짜 20년 전으로 돌아간 거 같아요.", "a": "1. 제품의 효과 추가 제시\n2. '20년 전' → 단순히 피로 풀림이 아님을 언급 → 소비자가 듣고 싶은 말"}, {"t": "요즘 하루 4시간 자고 안 피곤한 거 있죠?", "a": "1. '4시간' → 구체적 시간 언급 → 효과가 좋음 어필\n2. '20년 전으로 돌아감'을 직관적으로 나타냄"}, {"t": "근데 심지어 단돈 만원대로 부담도 없더라고요.", "a": "1. '심지어', '단돈'\n→ 가격이 저렴함을 강조\n2. 효과 좋음 → 단돈 만원대 → 안 살 이유가 없음 → 구매력 높임\n3. '비싼 링거'와 대비되어 가격적 이득이 강조됨"}, {"t": "간이 건강한 게 뭔지 제대로 느껴보고 싶다면 꼭 한번 먹어보세요.", "a": "1. 앞에서 20년 전 모습을 상상하게 만들었기에 더욱 효과적임\n2. 자연스럽게 사게 만듦"}], "source": {"label": "원본 기록 보기 (광고 영상 포함)", "url": "https://subsequent-liver-5a9.notion.site/261002_-e4718526b5a483ed955081239da93f26"}}},
   {color:'#1c1b17', c2:'#0f0f0d', eyebrow:'공정 04, 피부 광고', title:'글로3', date:'2026.10.02', score:'★★★★',
-   desc:'음식 양 하나로 효과를 직관적으로 보여주는 힘은 강하지만, 중반부터 소비자 이득과 상관없는 정보로 메시지가 흐려지는 광고.',
+   desc:'음식 양 하나로 효과를 직관적으로 보여주는 힘이 강한 광고. 중간에 \'속광 피부\'와 거리가 있는 설명을 조금 덜어내면 메시지가 더 또렷해질 것 같다.',
    rows:[
     ['시금치 10단, 달걀 20개, 브로콜리 5개 촉촉한 속광 피부에 필요한 양입니다.','1. 엄청나게 많은 양의 음식 → 시선 집중\n→ 속광 피부에 필요 → “이걸 어떻게 다 먹지” 라는 생각 유도'],
     ['그런데 글로3 한 포에 이걸 다 먹은 만큼 비타민 A와 E가 들어있어 일주일 만에 갈라짐 없는 촉촉한 속광 피부를 만들어줍니다.','1. ‘그런데’ → 앞 문장과 반대 암시\n2. 글로3 한 포 비타민 양 = 엄청나게 많은 양의 음식\n→ 노력 X, 확실한 이득 O → 기능적 이득 강조\n3. ‘일주일 만에 촉촉한 속광 피부’ → 빠른 효과 O → 소비자가 듣고 싶은 말'],
@@ -1164,7 +1229,7 @@ var CASES = [
    good:['초반에 엄청나게 많은 음식을 시각적으로 보여줘 어려운 성분 이야기 없이 직관적으로 설명함','소비자가 진짜 필요로 하는 건 ‘비타민 A와 E를 먹는 것’이 아니라 ‘갈라짐 없는 촉촉한 속광 피부’이기에, 듣고 싶은 말을 해서 니즈를 충족함','빈 속에 먹을 수 없는 영양제와 비교해 제품을 차별화함','끝부분에 자극적인 단어로 ‘오직 올록담의 올리브 캡슐’을 사야 하는 이유를 강하게 어필함'],
    bad:['‘지중해 3국’이라는 정보가 소비자의 이득으로 연결되지 않아 관심을 끌기 어려움. 삭제하거나 내용을 추가하는 게 좋아 보임','고함량 올레산 > 잔여물 배출 > 몸 속이 깨끗 > 최적의 피부 환경 구조가 너무 길고 직관적으로 와닿지 않음','마지막 부분이 밋밋함'],
    fix:['“빈 속에 먹기 부담스러운 영양제랑 달리 글로3는 올리브유 속에 비타민을 담아 오히려 아침 공복에 먹으면 효과는 2배가 됩니다.”','“고함량 올레산이 몸 속 잔여물을 배출해줘 피부도 속부터 맑고 촉촉해져요.”','“촉촉한 속광 피부 원하신다면, 하루 한 포 글로3로 시작해보세요.”'],
-   flow:{"target": "촉촉한 속광 피부를 원하는데 피부가 건조한 사람", "steps": [{"name": "후킹", "ref": "1번", "verdict": "good", "quote": "\"시금치 10단, 달걀 20개, 브로콜리 5개 촉촉한 속광 피부에 필요한 양입니다.\"", "judge": "어려운 성분 이야기 없이 엄청난 음식 양으로 효과를 직관적으로 보여줌"}, {"name": "니즈", "ref": "2번", "verdict": "good", "quote": "\"글로3 한 포에 이걸 다 먹은 만큼… 일주일 만에 갈라짐 없는 촉촉한 속광 피부\"", "judge": "소비자가 원하는 건 '비타민 A·E'가 아니라 '속광 피부'라서, 듣고 싶은 말을 함"}, {"name": "차별화", "ref": "3번", "verdict": "bad", "quote": "\"빈 속에 먹기 부담스러운 영양제랑 달리 글로3는 지중해 3국 올리브유 속에 비타민을 담아…\"", "pairs": [{"verdict": "good", "judge": "빈 속에 먹기 부담스러운 다른 영양제와 비교해 차별화함"}, {"judge": "'지중해 3국'이라는 정보가 소비자 이득으로 연결되지 않아 관심을 끌지 못함", "idea": "\"빈 속에 먹기 부담스러운 영양제랑 달리 글로3는 올리브유 속에 비타민을 담아 오히려 아침 공복에 먹으면 효과는 2배가 됩니다.\""}]}, {"name": "추가 효과", "ref": "4~5번", "verdict": "bad", "quote": "\"이게 끝이 아니에요\" → \"올레산이 딱딱하게 쌓인 잔여물을 배출시키니까… 최적의 피부 환경을 만들어줘요\"", "judge": "설명이 너무 길고, '몸속이 깨끗 → 최적의 피부 환경' 연결이 직관적이지 않음", "idea": "\"고함량 올레산이 몸 속 잔여물을 배출해줘 피부도 속부터 맑고 촉촉해져요.\""}, {"name": "혜택", "ref": "6번", "verdict": "good", "quote": "\"국내 1위 올리브 캡슐 올록담에서 1년 만에 나온 신제품으로 딱 3일만 69% 특가\"", "judge": "'국내 1위', '신제품', '딱 3일만'으로 신뢰와 희소성, 지금 사야 할 이유를 줌"}, {"name": "구매 유도", "ref": "7번", "verdict": "bad", "quote": "\"속광, 건조함 고민은 국내 유일 올리브 비타민 글로3로 해결하세요.\"", "judge": "마지막 구매 유도가 밋밋함", "idea": "\"촉촉한 속광 피부 원하신다면, 하루 한 포 글로3로 시작해보세요.\""}], "script": [{"t": "시금치 10단, 달걀 20개, 브로콜리 5개 촉촉한 속광 피부에 필요한 양입니다.", "a": "1. 엄청나게 많은 양의 음식 → 시선 집중시킴\n→ 속광 피부에 필요 → \"이걸 어떻게 다 먹지?\"라는 생각 유도"}, {"t": "그런데 글로3 한 포에 이걸 다 먹은 만큼 비타민 A와 E가 들어있어 일주일 만에 갈라짐 없는 촉촉한 속광 피부를 만들어줍니다.", "a": "1. '그런데' → 앞 문장과 반대 암시\n2. 글로3 한 포 비타민 양 = 엄청나게 많은 양의 음식\n→ 노력 X, 확실한 이득 O → 기능적 이득 강조\n3. '일주일 만에 촉촉한 속광 피부' → 빠른 효과 O → 소비자가 듣고 싶은 말"}, {"t": "빈 속에 먹기 부담스러운 영양제랑 달리 글로3는 지중해 3국 올리브유 속에 비타민을 담아 오히려 아침 공복에 먹으면 효과는 2배가 됩니다.", "a": "1. 타 영양제와 비교 (빈 속에 부담 VS 공복에 효과 2배)\n→ 타 영양제의 문제를 끌어옴 → 자사 제품의 장점 더욱 극대화\n→ 제품만의 차별점"}, {"t": "이게 끝이 아니에요.", "a": "1. 제품의 강점이 끝나지 않음을 어필 → 궁금증 유발 → 이탈 방지"}, {"t": "올리브유에 함유된 고함량 올레산이 딱딱하게 쌓인 잔여물을 배출시키니까 몸속부터 깨끗해져 최적의 피부 환경을 만들어줘요.", "a": "1. 제품 속 특정 성분의 장점 추가 어필\n→ 제품 속 비타민만 좋은 게 아님 → 올리브유 성분도 좋음\n→ 몸속을 깨끗하게 만듦 → 최적의 피부 환경"}, {"t": "국내 1위 올리브 캡슐 올록담에서 1년 만에 나온 신제품으로 딱 3일만 69% 특가 진행 중입니다.", "a": "1. 소비자의 관심을 끌 수 있는 단어 사용\n→ '국내 1위' → 신뢰를 줌\n→ '1년 만에 나온 신제품' → 희소성을 갖게 함\n→ '딱 3일만 69% 특가' → 지금 구매하게 함"}, {"t": "속광, 건조함 고민은 국내 유일 올리브 비타민 글로3로 해결하세요.", "a": "1. 소비자의 문제 해결 방법 = 글로3\n→ 소비자의 구매를 유도함"}], "source": {"label": "원본 기록 보기 (광고 영상 포함)", "url": "https://subsequent-liver-5a9.notion.site/261002_-93418526b5a483cc93e5814b69682265"}}}
+   flow:{"target": "피부가 건조해서 촉촉한 속광 피부를 원하는 사람", "lead": "음식 양 하나로 효과를 직관적으로 보여주는 힘이 강한 광고. 중간에 '속광 피부'와 거리가 있는 설명을 조금 덜어내면 메시지가 더 또렷해질 것 같다.", "video": {"src": "cases/ad_glow3.mp4", "poster": "cases/ad_glow3_poster.jpg", "credit": "출처: 올록담 광고 (메타 광고 라이브러리)", "note": "분석 목적으로만 사용하며, 요청 시 즉시 삭제합니다."}, "steps": [{"name": "후킹", "ref": "1번", "time": 0, "verdict": "good", "lines": ["\"시금치 10단, 달걀 20개, 브로콜리 5개 촉촉한 속광 피부에 필요한 양입니다.\""], "judge": "시금치 10단, 달걀 20개, 브로콜리 5개라는 엄청난 양을 눈으로 보여줘서, 어려운 성분 이야기 없이도 \"이걸 어떻게 다 먹지?\" 하고 멈추게 만든다."}, {"name": "니즈", "ref": "2번", "time": 5, "verdict": "good", "lines": ["\"그런데 글로3 한 포에 이걸 다 먹은 만큼 비타민 A와 E가 들어있어 일주일 만에 갈라짐 없는 촉촉한 속광 피부를 만들어줍니다.\""], "judge": "소비자가 원하는 건 '비타민 A·E를 먹는 것'이 아니라 '갈라짐 없는 촉촉한 속광 피부'라서, 그 결과를 바로 말해주며 듣고 싶은 말을 한다. 그 많은 양을 '한 포'로 대신한다는 간편함도 함께 보여준다."}, {"name": "차별화", "ref": "3번", "time": 13, "verdict": "bad", "lines": ["\"빈 속에 먹기 부담스러운 영양제랑 달리 글로3는 지중해 3국 올리브유 속에 비타민을 담아 오히려 아침 공복에 먹으면 효과는 2배가 됩니다.\""], "pairs": [{"verdict": "good", "judge": "빈 속에 먹기 부담스러운 다른 영양제와 비교해서, 오히려 공복에 먹으면 효과가 2배라는 차별점을 만든다."}, {"judge": "'지중해 3국'은 원료가 좋다는 걸 말하려는 것 같지만, 소비자가 얻는 이득으로 바로 이어지지 않아서 빼거나 이유를 붙이면 더 깔끔할 것 같다.", "idea": "\"빈 속에 먹기 부담스러운 영양제랑 달리 글로3는 올리브유 속에 비타민을 담아 오히려 아침 공복에 먹으면 효과는 2배가 됩니다.\"", "ideaNote": "'지중해 3국' 삭제"}]}, {"name": "추가 효과", "ref": "4~5번", "time": 21, "verdict": "bad", "lines": ["\"이게 끝이 아니에요.\"", "\"올리브유에 함유된 고함량 올레산이 딱딱하게 쌓인 잔여물을 배출시키니까 몸속부터 깨끗해져 최적의 피부 환경을 만들어줘요.\""], "pairs": [{"verdict": "good", "judge": "'이게 끝이 아니에요'로 다음 장점을 궁금하게 만들어 끝까지 보게 한다."}, {"judge": "올레산 → 잔여물 배출 → 몸속이 깨끗 → 최적의 피부 환경으로 이어지는 설명이 조금 길고, 몸속이 깨끗해지는 게 피부로 바로 이어지지 않아서 짧게 줄이면 더 직관적일 것 같다.", "idea": "\"**고함량 올레산이 몸속 잔여물을 배출해줘 피부도 속부터 맑고 촉촉해져요.**\""}]}, {"name": "혜택", "ref": "6번", "time": 30, "verdict": "good", "lines": ["\"국내 1위 올리브 캡슐 올록담에서 1년 만에 나온 신제품으로 딱 3일만 69% 특가 진행 중입니다.\""], "judge": "'국내 1위', '1년 만에 나온 신제품', '딱 3일만 69% 특가'로 신뢰와 희소성을 주고, 지금 사야 할 이유까지 만든다."}, {"name": "구매 유도", "ref": "7번", "time": 36, "verdict": "bad", "lines": ["\"속광, 건조함 고민은 국내 유일 올리브 비타민 글로3로 해결하세요.\""], "pairs": [{"verdict": "good", "judge": "'국내 유일 올리브 비타민'이라는 말로, 다른 영양제가 아니라 꼭 이 제품이어야 하는 이유를 강하게 남긴다."}, {"judge": "다만 마지막 한마디가 '해결하세요'로 끝나서 조금 밋밋하다. 처음에 약속한 '촉촉한 속광 피부'로 다시 돌아와 마무리하면 더 기억에 남을 것 같다.", "idea": "\"**촉촉한 속광 피부 원하신다면,** 국내 유일 올리브 비타민 글로3로 **시작해보세요**.\""}]}], "script": [{"t": "시금치 10단, 달걀 20개, 브로콜리 5개 촉촉한 속광 피부에 필요한 양입니다.", "a": "1. 엄청나게 많은 양의 음식 → 시선 집중시킴\n→ 속광 피부에 필요 → \"이걸 어떻게 다 먹지?\"라는 생각 유도"}, {"t": "그런데 글로3 한 포에 이걸 다 먹은 만큼 비타민 A와 E가 들어있어 일주일 만에 갈라짐 없는 촉촉한 속광 피부를 만들어줍니다.", "a": "1. '그런데' → 앞 문장과 반대 암시\n2. 글로3 한 포 비타민 양 = 엄청나게 많은 양의 음식\n→ 노력 X, 확실한 이득 O → 기능적 이득 강조\n3. '일주일 만에 촉촉한 속광 피부' → 빠른 효과 O → 소비자가 듣고 싶은 말"}, {"t": "빈 속에 먹기 부담스러운 영양제랑 달리 글로3는 지중해 3국 올리브유 속에 비타민을 담아 오히려 아침 공복에 먹으면 효과는 2배가 됩니다.", "a": "1. 타 영양제와 비교 (빈 속에 부담 VS 공복에 효과 2배)\n→ 타 영양제의 문제를 끌어옴 → 자사 제품의 장점 더욱 극대화\n→ 제품만의 차별점"}, {"t": "이게 끝이 아니에요.", "a": "1. 제품의 강점이 끝나지 않음을 어필 → 궁금증 유발 → 이탈 방지"}, {"t": "올리브유에 함유된 고함량 올레산이 딱딱하게 쌓인 잔여물을 배출시키니까 몸속부터 깨끗해져 최적의 피부 환경을 만들어줘요.", "a": "1. 제품 속 특정 성분의 장점 추가 어필\n→ 제품 속 비타민만 좋은 게 아님 → 올리브유 성분도 좋음\n→ 몸속을 깨끗하게 만듦 → 최적의 피부 환경"}, {"t": "국내 1위 올리브 캡슐 올록담에서 1년 만에 나온 신제품으로 딱 3일만 69% 특가 진행 중입니다.", "a": "1. 소비자의 관심을 끌 수 있는 단어 사용\n→ '국내 1위' → 신뢰를 줌\n→ '1년 만에 나온 신제품' → 희소성을 갖게 함\n→ '딱 3일만 69% 특가' → 지금 구매하게 함"}, {"t": "속광, 건조함 고민은 국내 유일 올리브 비타민 글로3로 해결하세요.", "a": "1. 소비자의 문제 해결 방법 = 글로3\n→ 소비자의 구매를 유도함"}], "source": {"label": "원본 기록 보기 (광고 영상 포함)", "url": "https://subsequent-liver-5a9.notion.site/261002_-93418526b5a483cc93e5814b69682265"}}}
 ];
 
 /* ===================== 1. 3D 현장 (v3) ===================== */
@@ -1413,7 +1478,7 @@ function setActive(i){
   if (i === active) return; var first = active < 0; active = i; var c = CASES[i];
   panel.style.setProperty('--case', c.color); sheet.style.setProperty('--case', c.color);
   Array.prototype.forEach.call($('cdots').children, function(b, j){ b.classList.toggle('on', j===i); });
-  $('cNum').textContent = '0' + (i+1); $('cRows').textContent = c.rows.length; $('cScore').textContent = c.score;
+  $('cNum').textContent = '0' + (i+1);
   function fill(){ $('cEyebrow').textContent = c.eyebrow; $('cTitle').textContent = c.title; $('cDesc').textContent = c.desc; }
   clearTimeout(swapTimer);
   if (first || reduce){ fill(); return; }
@@ -1449,7 +1514,6 @@ function poster(c, i){
   g.fillStyle = '#0b0b0b'; rr(px+pw/2-60, py+26, 120, 26, 13); g.fill();
   g.fillStyle = 'rgba(242,183,5,.35)'; g.fillRect(100, H - 170, 820, 2);
   g.fillStyle = 'rgba(255,255,255,.85)'; g.font = '700 34px "Noto Sans KR", sans-serif'; g.fillText(c.title + ', ' + c.eyebrow.replace(/^공정 [0-9]+, /, ''), 100, H - 105);
-  g.textAlign = 'right'; g.font = '800 30px Archivo, sans-serif'; g.fillText(c.rows.length + '문장 해체', W - 100, H - 105); g.textAlign = 'left';
   var id = g.getImageData(0,0,W,H), d = id.data;
   for (var n=0;n<d.length;n+=4){ var v = (Math.random()-.5)*16; d[n]+=v; d[n+1]+=v; d[n+2]+=v; }
   g.putImageData(id,0,0);
@@ -1535,29 +1599,60 @@ function paperLines(c, n){
 function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function list(a, empty){ return a.length ? '<ol>' + a.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ol>' : '<p class="empty">' + empty + '</p>'; }
 function flowName(v){ return v === 'good' ? '좋음' : v === 'bad' ? '아쉬움' : ''; }
-function flowSheet(f){
+function flowTime(t){ return Math.floor(t / 60) + ':' + ('0' + Math.floor(t % 60)).slice(-2); }
+function flowIdea(t){ return /\*\*/.test(t) ? '<p class="fl-ib">' + esc(t).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') + '</p>' : '<p>' + esc(t) + '</p>'; }
+function flowSheet(f, opt){
   var steps = f.steps.map(function(x){
-    var n = flowName(x.verdict);
-    return '<li class="fl-step ' + (x.verdict || 'none') + '"><div class="fl-k"><b>' + esc(x.name) + '</b><span>' + esc(x.ref) + '</span></div><div class="fl-v"><p class="fl-q">' + esc(x.quote) + '</p>'
-      + (n ? (x.pairs || [x]).map(function(p){ var pv = x.pairs && p.verdict; return '<p class="fl-j"><b' + (pv ? ' class="fl-l-' + pv + '"' : '') + '>' + (pv ? flowName(pv) : n) + '</b>' + esc(p.judge) + '</p>' + (p.idea ? '<div class="fl-idea"><span>나라면 이렇게</span><p>' + esc(p.idea) + '</p></div>' : ''); }).join('') : '') + '</div></li>';
+    var n = flowName(x.verdict), has = x.time != null;
+    return '<li class="fl-step ' + (x.verdict || 'none') + '"' + (has ? ' data-t="' + x.time + '"' : '') + '><div class="fl-k"><b>' + esc(x.name) + '</b>' + (has ? '<button class="fl-time" type="button" data-t="' + x.time + '" aria-label="영상 ' + flowTime(x.time) + '부터 재생">▶ ' + flowTime(x.time) + '</button>' : '') + '<span>' + esc(x.ref) + '</span></div><div class="fl-v">' + (x.lines || [x.quote]).map(function(q){ return '<p class="fl-q">' + esc(q) + '</p>'; }).join('')
+      + (n ? (x.pairs || [x]).map(function(p){ var pv = x.pairs && p.verdict; return '<p class="fl-j"><b' + (pv ? ' class="fl-l-' + pv + '"' : '') + '>' + (pv ? flowName(pv) : n) + '</b>' + esc(p.judge) + '</p>' + (p.idea ? '<div class="fl-idea"><span>나라면 이렇게</span>' + flowIdea(p.idea) + (p.ideaNote ? '<p class="fl-in">' + esc(p.ideaNote) + '</p>' : '') + '</div>' : ''); }).join('') : '') + '</div></li>';
   }).join('');
   var script = f.script.map(function(x, i){ return '<li><span class="fl-no">' + (i + 1) + '</span><div><p class="fl-line">' + esc(x.t) + '</p><p class="fl-note">' + esc(x.a) + '</p></div></li>'; }).join('');
-  var link = f.source ? '<a class="fl-btn ghost" href="' + esc(f.source.url) + '" target="_blank" rel="noopener noreferrer">' + esc(f.source.label) + '</a>' : '';
+  var link = f.source && !(opt && opt.noSource) ? '<a class="fl-btn ghost" href="' + esc(f.source.url) + '" target="_blank" rel="noopener noreferrer">' + esc(f.source.label) + '</a>' : '';
   return '<ol class="fl-steps">' + steps + '</ol><div class="fl-actions"><button class="fl-btn fl-toggle" type="button" aria-expanded="false" aria-controls="flLines">문장별 분석 전체 보기</button>' + link + '</div><ol class="fl-lines" id="flLines" hidden>' + script + '</ol>';
+}
+// 영상 + 분석 좌우 분할: c.flow.video가 있는 카드에 쓴다 (다른 카드·광고 제작 섹션에도 같은 구조로 재사용)
+function splitHTML(c, f){
+  var v = f.video;
+  return '<div class="vs"><aside class="vs-media"><div class="vs-frame"><video class="vs-player" controls playsinline preload="metadata" poster="' + esc(v.poster) + '"><source src="' + esc(v.src) + '" type="video/mp4"></video>'
+    + '<p class="vs-cap"><span>' + esc(v.credit) + '</span>' + (v.note ? '<span class="vs-note">' + esc(v.note) + '</span>' : '') + (f.source ? '<a href="' + esc(f.source.url) + '" target="_blank" rel="noopener noreferrer">원본 기록 보기</a>' : '') + '</p></div></aside>'
+    + '<div class="vs-body"><h3 class="vs-title">' + esc(c.title) + '</h3><p class="fl-target">타겟: ' + esc(f.target) + '</p><p class="lead">' + esc(f.lead || c.desc) + '</p><div class="paper full fl">' + flowSheet(f, {noSource: true}) + '</div></div></div>';
+}
+function splitMark(){
+  var box = $('sSplit'), v = box.querySelector('video'); if (!v) return;
+  var t = v.currentTime, on = !v.ended && (t > 0 || !v.paused), cur = null;
+  [].forEach.call(box.querySelectorAll('.fl-step[data-t]'), function(li){ if (+li.getAttribute('data-t') <= t + 0.05) cur = li; });
+  [].forEach.call(box.querySelectorAll('.fl-step.is-now'), function(li){ if (li !== cur || !on) li.classList.remove('is-now'); });
+  if (cur && on) cur.classList.add('is-now');
+}
+function splitMini(){
+  var vs = $('sSplit').querySelector('.vs'); if (!vs) return;
+  var mob = window.matchMedia && matchMedia('(max-width: 820px)').matches;
+  vs.classList.toggle('mini', mob && sheet.scrollTop > vs.offsetTop + vs.querySelector('.vs-player').offsetHeight * 0.35);
+}
+function renderSplit(c, f){
+  var box = $('sSplit'), old = box.querySelector('video'); if (old) old.pause();
+  var on = !!(f && f.video); sheet.classList.toggle('vs-on', on);
+  box.innerHTML = on ? splitHTML(c, f) : '';
+  if (!on) return;
+  sheet.style.setProperty('--sth', sheet.querySelector('.sheet-top').offsetHeight + 'px');
+  var v = box.querySelector('video');
+  ['timeupdate', 'seeked', 'play', 'pause', 'ended'].forEach(function(ev){ v.addEventListener(ev, splitMark); });
 }
 var lastFocus = null;
 function openSheet(i){
   var c = CASES[i]; lastFocus = document.activeElement;
   $('sEyebrow').textContent = c.eyebrow.replace(/^공정 \d+, /, '') + ', ' + c.rows.length + '문장'; $('sTitle').textContent = c.title; $('sThumb').src = THUMBS[i]; $('sHook').textContent = c.desc;
   var f = c.flow; sheet.classList.toggle('fl-on', !!f); $('sPaper').classList.toggle('fl', !!f); $('sTarget').hidden = !f; $('sTarget').textContent = f ? '타겟: ' + f.target : '';
-  $('sPaper').innerHTML = f ? flowSheet(f) : c.rows.map(function(r, j){ return '<div class="pl"><span class="no">' + (j + 1) + '</span><div class="src-w"><p class="src">' + marked(r[0], r[1]) + '</p><p class="memo">' + esc(r[1] || '') + '</p></div><span class="pen">' + escH(penNote(r[1])) + '</span></div>'; }).join('');
+  $('sPaper').innerHTML = f && f.video ? '' : f ? flowSheet(f) : c.rows.map(function(r, j){ return '<div class="pl"><span class="no">' + (j + 1) + '</span><div class="src-w"><p class="src">' + marked(r[0], r[1]) + '</p><p class="memo">' + esc(r[1] || '') + '</p></div><span class="pen">' + escH(penNote(r[1])) + '</span></div>'; }).join('');
   $('sGood').innerHTML = list(c.good, '작성 중'); $('sBad').innerHTML = list(c.bad, '작성 중'); $('sFix').innerHTML = list(c.fix, '작성 중');
+  renderSplit(c, f);
   if (sheet.classList.contains('on')) return;
   sheet.scrollTop = 0; PAUSE = true; sheet.classList.add('on'); if (lenis) lenis.stop(); else document.body.style.overflow = 'hidden';
   try { history.pushState({sheet: 1}, ''); } catch(e){}
   setTimeout(function(){ $('sClose').focus({preventScroll: true}); }, 60);
 }
-function closeSheet(){ if (!sheet.classList.contains('on')) return; sheet.classList.remove('on'); PAUSE = false; document.body.style.overflow = ''; if (lenis) lenis.start(); if (lastFocus) lastFocus.focus({preventScroll: true}); }
+function closeSheet(){ if (!sheet.classList.contains('on')) return; var sv = $('sSplit').querySelector('video'); if (sv) sv.pause(); sheet.classList.remove('on'); PAUSE = false; document.body.style.overflow = ''; if (lenis) lenis.start(); if (lastFocus) lastFocus.focus({preventScroll: true}); }
 // 닫기·ESC는 열 때 쌓은 기록을 되돌리고, 뒤로가기는 창만 닫는다
 function dismissSheet(){ if (history.state && history.state.sheet) history.back(); else closeSheet(); }
 addEventListener('popstate', function(){ closeSheet(); });
@@ -1570,14 +1665,47 @@ $('sPaper').addEventListener('click', function(e){
   b.setAttribute('aria-expanded', open ? 'true' : 'false'); b.textContent = open ? '문장별 분석 접기' : '문장별 분석 전체 보기';
 });
 addEventListener('keydown', function(e){ if (e.key === 'Escape' && sheet.classList.contains('on')) dismissSheet(); });
-// 광고 제작: 영상 팝업
+$('sSplit').addEventListener('click', function(e){
+  var t = e.target.closest('.fl-time');
+  if (t){ var v = $('sSplit').querySelector('video'); v.currentTime = +t.getAttribute('data-t'); var p = v.play(); if (p && p.catch) p.catch(function(){}); splitMark(); return; }
+  var b = e.target.closest('.fl-toggle'); if (!b) return;
+  var l = $('flLines'), open = l.hidden; l.hidden = !open;
+  b.setAttribute('aria-expanded', open ? 'true' : 'false'); b.textContent = open ? '문장별 분석 접기' : '문장별 분석 전체 보기';
+});
+sheet.addEventListener('scroll', splitMini, {passive: true});
+addEventListener('resize', splitMini);
+// 광고 제작: 레퍼런스와 내 광고를 나란히 보며 읽기
+var mkGo = null;
 (function(){
-  var dlg = $('mkModal'), video = $('mkPlayer');
-  $('mkPlay').addEventListener('click', function(){ dlg.showModal(); PAUSE = true; document.documentElement.classList.add('mk-lock'); if (lenis) lenis.stop(); });
-  $('mkClose').addEventListener('click', function(){ dlg.close(); });
-  dlg.addEventListener('click', function(e){ if (e.target === dlg) dlg.close(); });
-  dlg.addEventListener('close', function(){ video.pause(); video.load(); PAUSE = false; document.documentElement.classList.remove('mk-lock'); if (lenis) lenis.start(); });
-  dlg.addEventListener('touchmove', function(e){ if (e.target !== video) e.preventDefault(); }, {passive: false});
+  var box = $('mkv'); if (!box) return;
+  var refV = $('mkRefV'), myV = $('mkMyV'), ov = $('mkRefOv'), vids = [refV, myV];
+  var steps = [].slice.call(box.querySelectorAll('.fl-step[data-t]'));
+  var pairs = [].slice.call(box.querySelectorAll('.mk-play')).map(function(b){ return {my: +b.getAttribute('data-my'), ref: b.getAttribute('data-ref')}; }).sort(function(x, y){ return x.my - y.my; });
+  function syncSnd(){ [].forEach.call(box.querySelectorAll('.mkv-snd'), function(b){ var v = $(b.getAttribute('data-v')), who = v === refV ? '레퍼런스' : '내 광고'; b.textContent = v.muted ? '🔇' : '🔊'; b.setAttribute('aria-label', who + (v.muted ? ' 소리 켜기' : ' 소리 끄기')); }); }
+  // 한 번에 하나만 소리: 한쪽 소리를 켜면 다른 쪽은 음소거
+  vids.forEach(function(v){ v.addEventListener('volumechange', function(){ if (!v.muted) vids.forEach(function(o){ if (o !== v && !o.muted) o.muted = true; }); syncSnd(); }); });
+  function seek(v, t){ function f(){ try { v.currentTime = t; } catch(e){} } if (v.readyState >= 1) f(); else v.addEventListener('loadedmetadata', f, {once: true}); }
+  function play(v){ var p = v.play(); if (p && p.catch) p.catch(function(){ v.muted = true; var r = v.play(); if (r && r.catch) r.catch(function(){}); }); }
+  function mark(){
+    var t = myV.currentTime, on = !myV.ended && (t > 0 || !myV.paused), cur = null;
+    steps.forEach(function(li){ if (+li.getAttribute('data-t') <= t + 0.05) cur = li; });
+    steps.forEach(function(li){ li.classList.toggle('is-now', on && li === cur); });
+  }
+  // my: 내 광고 시점, ref: 레퍼런스 시점('none'이면 레퍼런스에 없는 장면, 비우면 같은 단계의 시점을 찾음)
+  function go(my, ref){
+    if (ref == null){ var p = null; pairs.forEach(function(x){ if (x.my <= my) p = x; }); ref = !p ? String(my) : p.ref === 'none' ? 'none' : String(+p.ref + (my - p.my)); }
+    seek(myV, my); play(myV);
+    if (ref === 'none'){ refV.pause(); ov.hidden = false; }
+    else { ov.hidden = true; seek(refV, +ref); play(refV); }
+    mark();
+  }
+  mkGo = go;
+  box.addEventListener('click', function(e){
+    var s = e.target.closest('.mkv-snd'); if (s){ var v = $(s.getAttribute('data-v')); v.muted = !v.muted; return; }
+    var b = e.target.closest('.mk-play'); if (b) go(+b.getAttribute('data-my'), b.getAttribute('data-ref'));
+  });
+  ['timeupdate', 'seeked', 'play', 'pause', 'ended'].forEach(function(ev){ myV.addEventListener(ev, mark); });
+  refV.muted = true; myV.muted = false; syncSnd();
 })();
 
 
@@ -1659,6 +1787,29 @@ if ('IntersectionObserver' in window && !reduce){
   var fio = new IntersectionObserver(function(es){ if (!es[0].isIntersecting) return; fio.disconnect(); var t0 = performance.now(); (function f(t){ var k = Math.min(1, (t - t0) / 1400), v = Math.round(1000 * (1 - Math.pow(1 - k, 3))); fol.textContent = v.toLocaleString('ko-KR'); if (k < 1) requestAnimationFrame(f); })(t0); }, {threshold:.6});
   fio.observe(fol);
 }
+/* ============ 바로가기 주소: ?ad=<광고 이름>&t=<초> ============ */
+// 예: ?ad=nifzen&t=27, ?ad=dexcanic&t=25, 광고 제작은 ?ad=production&t=36 → 니프젠 기록 화면을 열고 27초부터 재생. 광고 제작 영상은 ?ad=making&t=0
+// 나머지 카드도 이름만 연결돼 있어, 카드에 영상(flow.video)을 넣으면 같은 주소로 바로 재생된다.
+var AD_KEYS = {nifzen: 0, dexcanic: 1, liver: 2, glow3: 3};
+function deepPlay(v, t){
+  function seek(){ try { if (Math.abs(v.currentTime - t) > .5) v.currentTime = t; } catch(e){} }
+  if (v.readyState >= 1) seek(); else v.addEventListener('loadedmetadata', seek, {once: true});
+  // 소리 있는 자동 재생을 브라우저가 막으면, 소리를 끈 채로 재생한다 (재생바에서 소리를 켤 수 있다)
+  var p = v.play(); if (p && p.catch) p.catch(function(){ v.muted = true; var r = v.play(); if (r && r.catch) r.catch(function(){}); });
+}
+(function(){
+  var q = new URLSearchParams(location.search), ad = q.get('ad'); if (!ad) return;
+  var t = Math.max(0, parseFloat(q.get('t')) || 0);
+  if (ad === 'production' || ad === 'making'){ $('ad-production').scrollIntoView(); if (mkGo) mkGo(t, null); return; }
+  if (!Object.prototype.hasOwnProperty.call(AD_KEYS, ad)) return;
+  openSheet(AD_KEYS[ad]);
+  var v = $('sSplit').querySelector('video'); if (v) deepPlay(v, t);
+  // 해당 시간의 단계가 보이도록 기록 화면을 그 단계까지 내린다
+  if (v && t > 0) setTimeout(function(){
+    var cur = null; [].forEach.call($('sSplit').querySelectorAll('.fl-step[data-t]'), function(li){ if (+li.getAttribute('data-t') <= t) cur = li; });
+    if (cur) sheet.scrollTop += cur.getBoundingClientRect().top - (innerWidth > 820 ? 140 : 300);
+  }, 450);
+})();
 })();
 </script>
 
